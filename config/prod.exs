@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :mvp_api, MvpApiWeb.Endpoint,
   load_from_system_env: true,
-  http: [port: {:system, "PORT"}],
+  http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [scheme: "https", host: "mvp-api-jc.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
