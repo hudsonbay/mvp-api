@@ -56,7 +56,6 @@ defmodule MvpApiWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug MvpApiWeb.Router
 
   plug Corsica,
     origins: "*",
@@ -64,4 +63,6 @@ defmodule MvpApiWeb.Endpoint do
     allow_headers: :all,
     allow_methods: :all,
     allow_credentials: true
+
+  plug MvpApiWeb.Router
 end

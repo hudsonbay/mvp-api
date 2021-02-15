@@ -20,7 +20,7 @@ defmodule MvpApi.MixProject do
   def application do
     [
       mod: {MvpApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :corsica]
     ]
   end
 
