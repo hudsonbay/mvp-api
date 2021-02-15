@@ -52,7 +52,8 @@ defmodule MvpApi.MixProject do
       {:guardian, "~> 2.0"},
       {:kaffy, "~> 0.9.0"},
       {:decimal, "~> 1.9"},
-      {:numbers, "~> 5.2"}
+      {:numbers, "~> 5.2"},
+      {:corsica, "~> 1.0"}
     ]
   end
 

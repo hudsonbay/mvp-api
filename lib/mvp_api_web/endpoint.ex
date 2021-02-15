@@ -57,4 +57,11 @@ defmodule MvpApiWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug MvpApiWeb.Router
+
+  plug Corsica,
+    origins: "*",
+    log: [rejected: :error, invalid: :warn, accepted: :debug],
+    allow_headers: :all,
+    allow_methods: :all,
+    allow_credentials: true
 end
