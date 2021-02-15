@@ -3,7 +3,9 @@ defmodule MvpApiWeb.UserRegistrationController do
 
   alias MvpApi.Accounts
   alias MvpApi.Accounts.User
-  alias MvpApiWeb.UserAuth
+  alias MvpApiWeb.ChangesetView
+
+  action_fallback MvpApiWeb.FallbackController
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
@@ -35,10 +37,17 @@ defmodule MvpApiWeb.UserRegistrationController do
         |> put_status(201)
         |> render("create.json", user: user)
 
-      nil ->
+      # {:error, %Ecto.Changeset{} = changeset} ->
+      #   render(conn, "error.json", changeset: changeset)
+
+      {:error, changeset} ->
         conn
-        |> put_status(401)
-        |> render("error.json", message: "User could not be created")
+        |> render(ChangesetView, "error.json", changeset: changeset)
+
+        # nil ->
+        #   conn
+        #   |> put_status(401)
+        #   |> render("register_error.json", message: "User could not be created")
     end
   end
 end
