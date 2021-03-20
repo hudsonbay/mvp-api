@@ -6,9 +6,13 @@ defmodule MvpApi.ProvidersTest do
   describe "providers" do
     alias MvpApi.Providers.Provider
 
-    @valid_attrs %{distance: "some distance", location: "some location", name: "some name"}
-    @update_attrs %{distance: "some updated distance", location: "some updated location", name: "some updated name"}
-    @invalid_attrs %{distance: nil, location: nil, name: nil}
+    @valid_attrs %{distance_km: "some distance", location: "some location", name: "some name"}
+    @update_attrs %{
+      distance_km: "some updated distance",
+      location: "some updated location",
+      name: "some updated name"
+    }
+    @invalid_attrs %{distance_km: nil, location: nil, name: nil}
 
     def provider_fixture(attrs \\ %{}) do
       {:ok, provider} =
@@ -31,7 +35,7 @@ defmodule MvpApi.ProvidersTest do
 
     test "create_provider/1 with valid data creates a provider" do
       assert {:ok, %Provider{} = provider} = Providers.create_provider(@valid_attrs)
-      assert provider.distance == "some distance"
+      assert provider.distance_km == "some distance"
       assert provider.location == "some location"
       assert provider.name == "some name"
     end
@@ -43,7 +47,7 @@ defmodule MvpApi.ProvidersTest do
     test "update_provider/2 with valid data updates the provider" do
       provider = provider_fixture()
       assert {:ok, %Provider{} = provider} = Providers.update_provider(provider, @update_attrs)
-      assert provider.distance == "some updated distance"
+      assert provider.distance_km == "some updated distance"
       assert provider.location == "some updated location"
       assert provider.name == "some updated name"
     end
