@@ -41,6 +41,9 @@ defmodule MvpApiWeb.Router do
     resources "/products", ProductController, except: [:new, :edit] do
       resources "/factors", FactorController, except: [:new, :edit]
     end
+
+    resources "/admin/providers", ProviderController, except: [:new, :edit]
+    resources "/processes", ProcessController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
