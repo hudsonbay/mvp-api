@@ -21,10 +21,5 @@ defmodule MvpApi.Client.Product do
     |> cast(attrs, [:name])
     |> cast_assoc(:factors)
     |> validate_required([:name])
-
-    # |> obtain_final_rating()
   end
-
-  # defp obtain_final_rating(changeset) do
-  # end
 end
