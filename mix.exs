@@ -53,7 +53,8 @@ defmodule MvpApi.MixProject do
       {:kaffy, "~> 0.9.0"},
       {:decimal, "~> 1.9"},
       {:numbers, "~> 5.2"},
-      {:corsica, "~> 1.0"}
+      {:corsica, "~> 1.0"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 
