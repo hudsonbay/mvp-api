@@ -9,6 +9,5 @@ defmodule MvpApi.Repo.Migrations.CreateProcesses do
 
       timestamps()
     end
-
   end
 end
