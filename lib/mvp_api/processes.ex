@@ -19,6 +19,7 @@ defmodule MvpApi.Processes do
   """
   def list_processes do
     Repo.all(Process)
+    |> Repo.preload(:providers)
   end
 
   @doc """
