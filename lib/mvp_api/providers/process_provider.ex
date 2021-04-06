@@ -8,7 +8,8 @@ defmodule MvpApi.Providers.ProcessProvider do
 
   alias Numbers, as: N
 
-  @primary_key false
+  # @primary_key false
+  @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "process_providers" do
     field :anual_transportation_volume, :float, virtual: true
@@ -16,10 +17,10 @@ defmodule MvpApi.Providers.ProcessProvider do
     field :number_supplies_year, :integer
     field :tons_by_supplies, :float
 
-    belongs_to :provider, Provider, primary_key: true
-    belongs_to :process, Process, primary_key: true
-    # field :provider_id, :id, primary_key: true
-    # field :process_id, :id, primary_key: true
+    belongs_to :provider, Provider
+    belongs_to :process, Process
+    # field :provider_id, :binary_id, primary_key: true
+    # field :process_id, :binary_id, primary_key: true
   end
 
   @doc false
@@ -41,7 +42,10 @@ defmodule MvpApi.Providers.ProcessProvider do
     ])
     |> foreign_key_constraint(:process_id)
     |> foreign_key_constraint(:provider_id)
-    |> unique_constraint([:provider_id, :process_id], name: :process_id_provider_id_unique_index, message: "already exists")
+    |> unique_constraint([:provider_id, :process_id],
+      name: :process_id_provider_id_unique_index,
+      message: "already exists"
+    )
     |> calculate_anual_transportation_volume()
   end
 
@@ -50,8 +54,7 @@ defmodule MvpApi.Providers.ProcessProvider do
     number_supplies_year = get_change(changeset, :number_supplies_year)
 
     provider =
-      changeset
-      |> get_change(:provider_id)
+      get_change(changeset, :provider_id)
       |> Providers.get_provider!()
 
     changeset
