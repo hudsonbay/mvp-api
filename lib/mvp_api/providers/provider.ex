@@ -11,7 +11,9 @@ defmodule MvpApi.Providers.Provider do
     field :location, :string
     field :name, :string
 
-    many_to_many :processes, Process, join_through: "process_providers", on_replace: :delete
+    many_to_many :processes, Process,
+      join_through: MvpApi.Providers.ProcessProvider,
+      on_replace: :delete
 
     timestamps()
   end
