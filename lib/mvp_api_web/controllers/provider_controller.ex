@@ -3,6 +3,7 @@ defmodule MvpApiWeb.ProviderController do
 
   alias MvpApi.Providers
   alias MvpApi.Providers.Provider
+  alias MvpApi.Providers.ProcessProvider
 
   action_fallback MvpApiWeb.FallbackController
 
@@ -38,6 +39,21 @@ defmodule MvpApiWeb.ProviderController do
 
     with {:ok, %Provider{}} <- Providers.delete_provider(provider) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def providers_of_process(conn, %{"process_id" => process_id}) do
+    providers_of_process = Providers.get_providers_of_process(process_id)
+    render(conn, "show_process_providers.json", providers_of_process: providers_of_process)
+  end
+
+  def add_provider_to_process(conn, %{"process_provider" => process_provider_params}) do
+    with {:ok, %ProcessProvider{} = process_provider} <-
+           Providers.add_provider_to_process(process_provider_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", Routes.provider_path(conn, :show, process_provider))
+      |> text("Inserted")
     end
   end
 end

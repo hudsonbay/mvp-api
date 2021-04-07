@@ -5,6 +5,8 @@ defmodule MvpApi.Providers do
 
   import Ecto.Query, warn: false
   alias MvpApi.Repo
+  alias MvpApi.Providers.ProcessProvider
+  alias MvpApi.Processes.Process
 
   alias MvpApi.Providers.Provider
 
@@ -100,5 +102,46 @@ defmodule MvpApi.Providers do
   """
   def change_provider(%Provider{} = provider, attrs \\ %{}) do
     Provider.changeset(provider, attrs)
+  end
+
+  @doc """
+  Get all the providers of a process
+
+  returns a %ProcessProvider{}
+  """
+
+  def get_providers_of_process(process_id) do
+    Repo.all(
+      from pp in ProcessProvider,
+        where: pp.process_id == ^process_id,
+        join: provider in "providers",
+        on: pp.provider_id == provider.id,
+        select: %{
+          process_id: pp.process_id,
+          provider_id: pp.provider_id,
+          provider_name: provider.name,
+          distance_km: provider.distance_km,
+          location: provider.location,
+          goods_type: pp.goods_type,
+          number_supplies_year: pp.number_supplies_year,
+          tons_by_supplies: pp.tons_by_supplies
+        }
+    )
+  end
+
+  @doc """
+  Adds a provider to a process
+  """
+  def add_provider_to_process(attrs \\ %{}) do
+    %ProcessProvider{}
+    |> ProcessProvider.changeset(attrs)
+    |> Repo.insert()
+    |> case do
+      {:ok, %ProcessProvider{} = process_provider} ->
+        {:ok, Repo.preload(process_provider, [:process, :provider])}
+
+      error ->
+        error
+    end
   end
 end
