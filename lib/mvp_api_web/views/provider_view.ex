@@ -39,7 +39,12 @@ defmodule MvpApiWeb.ProviderView do
       tons_by_supplies: process_provider.tons_by_supplies,
       distance_km: process_provider.distance_km,
       location: process_provider.location,
-      anual_transportation_volume: Formulas.calculate_anual_transportation_volume(process_provider.tons_by_supplies, process_provider.number_supplies_year, process_provider.distance_km)
+      anual_transportation_volume:
+        Formulas.calculate_anual_transportation_volume(
+          process_provider.tons_by_supplies,
+          process_provider.number_supplies_year,
+          process_provider.distance_km
+        )
     }
   end
 end
