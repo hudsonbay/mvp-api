@@ -53,7 +53,7 @@ defmodule MvpApiWeb.ProviderController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.provider_path(conn, :show, process_provider))
-      |> text("Inserted")
+      |> json(%{message: "Provider added to process"})
     end
   end
 end
