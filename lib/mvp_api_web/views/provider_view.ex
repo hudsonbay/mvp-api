@@ -47,4 +47,18 @@ defmodule MvpApiWeb.ProviderView do
         )
     }
   end
+
+  def render("inserted_provider_to_process.json", %{process_provider: process_provider}) do
+    %{
+      process_id: process_provider.process.id,
+      provider_id: process_provider.provider.id,
+      provider_name: process_provider.provider.name,
+      goods_type: process_provider.goods_type,
+      number_supplies_year: process_provider.number_supplies_year,
+      tons_by_supplies: process_provider.tons_by_supplies,
+      distance_km: process_provider.provider.distance_km,
+      location: process_provider.provider.location,
+      anual_transportation_volume: process_provider.anual_transportation_volume
+    }
+  end
 end
