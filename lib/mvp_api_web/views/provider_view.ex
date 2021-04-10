@@ -22,6 +22,8 @@ defmodule MvpApiWeb.ProviderView do
 
   def render("show_process_providers.json", %{providers_of_process: providers_of_process}) do
     %{
+      total_anual_transportation_volume:
+        Formulas.calculate_total_anual_transportation_volume(providers_of_process),
       data:
         render_many(providers_of_process, ProviderView, "process_provider.json",
           as: :process_provider
