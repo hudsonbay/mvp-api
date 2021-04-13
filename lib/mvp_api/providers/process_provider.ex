@@ -17,10 +17,22 @@ defmodule MvpApi.Providers.ProcessProvider do
     field :number_supplies_year, :integer
     field :tons_by_supplies, :float
 
+    field :transportation_mode, Ecto.Enum,
+      values: [
+        :aereo,
+        :ferrocarril,
+        :automotor,
+        :cabotaje,
+        :fluvial,
+        :tuberia,
+        :multimodal,
+        :directo,
+        :manual,
+        :interno
+      ]
+
     belongs_to :provider, Provider
     belongs_to :process, Process
-    # field :provider_id, :binary_id, primary_key: true
-    # field :process_id, :binary_id, primary_key: true
   end
 
   @doc false
@@ -30,6 +42,7 @@ defmodule MvpApi.Providers.ProcessProvider do
       :number_supplies_year,
       :tons_by_supplies,
       :goods_type,
+      :transportation_mode,
       :process_id,
       :provider_id
     ])
@@ -37,6 +50,7 @@ defmodule MvpApi.Providers.ProcessProvider do
       :number_supplies_year,
       :tons_by_supplies,
       :goods_type,
+      :transportation_mode,
       :process_id,
       :provider_id
     ])

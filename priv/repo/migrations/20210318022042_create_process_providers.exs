@@ -7,6 +7,7 @@ defmodule MvpApi.Repo.Migrations.CreateProcessProviders do
       add :number_supplies_year, :integer, null: false
       add :tons_by_supplies, :float, null: false
       add :goods_type, :string, null: false
+      add :transportation_mode, :string, null: false
 
       add(:provider_id, references(:providers, on_delete: :delete_all, type: :binary_id),
         primary_key: true,
