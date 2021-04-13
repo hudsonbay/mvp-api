@@ -6,7 +6,6 @@ defmodule MvpApi.Providers do
   import Ecto.Query, warn: false
   alias MvpApi.Repo
   alias MvpApi.Providers.ProcessProvider
-  alias MvpApi.Processes.Process
 
   alias MvpApi.Providers.Provider
 
@@ -124,7 +123,8 @@ defmodule MvpApi.Providers do
           location: provider.location,
           goods_type: pp.goods_type,
           number_supplies_year: pp.number_supplies_year,
-          tons_by_supplies: pp.tons_by_supplies
+          tons_by_supplies: pp.tons_by_supplies,
+          transportation_mode: pp.transportation_mode
         }
     )
   end
