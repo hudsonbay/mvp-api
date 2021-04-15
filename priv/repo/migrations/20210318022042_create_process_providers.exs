@@ -10,23 +10,15 @@ defmodule MvpApi.Repo.Migrations.CreateProcessProviders do
       add :transportation_mode, :string, null: false
 
       add(:provider_id, references(:providers, on_delete: :delete_all, type: :binary_id),
-        primary_key: true,
         null: false
       )
 
       add(:process_id, references(:processes, on_delete: :delete_all, type: :binary_id),
-        primary_key: true,
         null: false
       )
     end
 
     create index(:process_providers, [:provider_id])
     create index(:process_providers, [:process_id])
-
-    create(
-      unique_index(:process_providers, [:provider_id, :process_id],
-        name: :process_id_provider_id_unique_index
-      )
-    )
   end
 end
