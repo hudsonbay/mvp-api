@@ -1,6 +1,6 @@
 defmodule MvpApiWeb.ProviderView do
   use MvpApiWeb, :view
-  alias MvpApiWeb.{ProviderView, ProviderEvaluationView}
+  alias MvpApiWeb.ProviderView
   alias MvpApi.Providers.Formulas
 
   def render("index.json", %{providers: providers}) do
