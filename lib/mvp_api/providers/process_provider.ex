@@ -5,6 +5,7 @@ defmodule MvpApi.Providers.ProcessProvider do
   alias MvpApi.Providers
   alias MvpApi.Providers.Provider
   alias MvpApi.Processes.Process
+  alias MvpApi.Providers.ProviderEvaluation
 
   alias Numbers, as: N
 
@@ -33,6 +34,8 @@ defmodule MvpApi.Providers.ProcessProvider do
 
     belongs_to :provider, Provider
     belongs_to :process, Process
+
+    has_one :provider_evaluation, ProviderEvaluation, on_replace: :delete
   end
 
   @doc false
@@ -54,6 +57,7 @@ defmodule MvpApi.Providers.ProcessProvider do
       :process_id,
       :provider_id
     ])
+    |> cast_assoc(:provider_evaluation)
     |> foreign_key_constraint(:process_id)
     |> foreign_key_constraint(:provider_id)
     |> unique_constraint([:provider_id, :process_id],
