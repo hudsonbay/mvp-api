@@ -116,6 +116,7 @@ defmodule MvpApi.Providers do
         join: provider in "providers",
         on: pp.provider_id == provider.id,
         select: %{
+          id: pp.id,
           process_id: pp.process_id,
           provider_id: pp.provider_id,
           provider_name: provider.name,
@@ -138,10 +139,122 @@ defmodule MvpApi.Providers do
     |> Repo.insert()
     |> case do
       {:ok, %ProcessProvider{} = process_provider} ->
-        {:ok, Repo.preload(process_provider, [:process, :provider])}
+        {:ok, Repo.preload(process_provider, [:process, :provider, :provider_evaluation])}
 
       error ->
         error
     end
+  end
+
+  alias MvpApi.Providers.ProviderEvaluation
+
+  @doc """
+  Returns the list of provider_evaluations.
+
+  ## Examples
+
+      iex> list_provider_evaluations()
+      [%ProviderEvaluation{}, ...]
+
+  """
+  def list_provider_evaluations do
+    Repo.all(ProviderEvaluation)
+  end
+
+  @doc """
+  Gets a single provider_evaluation.
+
+  Raises `Ecto.NoResultsError` if the Provider evaluation does not exist.
+
+  ## Examples
+
+      iex> get_provider_evaluation!(123)
+      %ProviderEvaluation{}
+
+      iex> get_provider_evaluation!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_provider_evaluation!(id), do: Repo.get!(ProviderEvaluation, id)
+
+   @doc """
+  Gets a provider_evaluation from a provider in a process
+
+  Raises `Ecto.NoResultsError` if the Provider evaluation does not exist.
+
+  ## Examples
+
+      iex> get_provider_evaluation_process_provider!(123)
+      %ProviderEvaluation{}
+
+      iex> get_provider_evaluation_process_provider!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_provider_evaluation_process_provider!(id), do: ProviderEvaluation |> Repo.get_by!(process_provider_id: id)
+
+  @doc """
+  Creates a provider_evaluation.
+
+  ## Examples
+
+      iex> create_provider_evaluation(%{field: value})
+      {:ok, %ProviderEvaluation{}}
+
+      iex> create_provider_evaluation(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_provider_evaluation(attrs \\ %{}) do
+    %ProviderEvaluation{}
+    |> ProviderEvaluation.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a provider_evaluation.
+
+  ## Examples
+
+      iex> update_provider_evaluation(provider_evaluation, %{field: new_value})
+      {:ok, %ProviderEvaluation{}}
+
+      iex> update_provider_evaluation(provider_evaluation, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_provider_evaluation(%ProviderEvaluation{} = provider_evaluation, attrs) do
+    provider_evaluation
+    |> ProviderEvaluation.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a provider_evaluation.
+
+  ## Examples
+
+      iex> delete_provider_evaluation(provider_evaluation)
+      {:ok, %ProviderEvaluation{}}
+
+      iex> delete_provider_evaluation(provider_evaluation)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_provider_evaluation(%ProviderEvaluation{} = provider_evaluation) do
+    Repo.delete(provider_evaluation)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking provider_evaluation changes.
+
+  ## Examples
+
+      iex> change_provider_evaluation(provider_evaluation)
+      %Ecto.Changeset{data: %ProviderEvaluation{}}
+
+  """
+  def change_provider_evaluation(%ProviderEvaluation{} = provider_evaluation, attrs \\ %{}) do
+    ProviderEvaluation.changeset(provider_evaluation, attrs)
   end
 end
