@@ -127,6 +127,6 @@ Repo.insert!(%ProviderEvaluation{
 })
 
 # Users
-Accounts.register_user(%{"email" => "manuel@gmail.com", "password" => "123qweasdzxc"})
+Accounts.register_user(%{"email" => "manuelmenendezalfonso@gmail.com", "password" => "123qweasdzxc"})
 Accounts.register_user(%{"email" => "daniel@gmail.com", "password" => "123qweasdzxc"})
 Accounts.register_user(%{"email" => "monteagudo@gmail.com", "password" => "123qweasdzxc"})
