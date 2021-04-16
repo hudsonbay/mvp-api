@@ -21,7 +21,7 @@ defmodule MvpApi.Providers.Formulas do
     |> Enum.sum()
   end
 
-  @@doc """
+  @doc """
   Calculates the final evaluation for a provider providing something to a process
   """
   def calculate_final_evaluation(provider_evaluation) do
