@@ -6,7 +6,7 @@ defmodule MvpApi.Providers.Formulas do
   """
   def calculate_anual_transportation_volume(process_provider) do
     process_provider.tons_by_supplies * process_provider.number_supplies_year *
-      process_provider.distance_km
+      process_provider.provider.distance_km
   end
 
   @doc """
