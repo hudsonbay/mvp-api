@@ -15,10 +15,8 @@ Faker.start()
 
 alias MvpApi.Client.{Product, Factor}
 alias MvpApi.Accounts
-alias MvpApi.Providers.Provider
 alias MvpApi.Processes.Process
-alias MvpApi.Providers.ProcessProvider
-alias MvpApi.Providers.ProviderEvaluation
+alias MvpApi.Providers.{Provider, ProcessProvider, ProviderEvaluation, TransportationSchema}
 
 # Products with factors
 for _ <- 0..10 do
@@ -79,23 +77,25 @@ process =
   })
 
 # Providers on processes
-process_provider1 = Repo.insert!(%ProcessProvider{
-  number_supplies_year: 280,
-  tons_by_supplies: 3.0,
-  goods_type: "Leche fluida",
-  transportation_mode: :automotor,
-  provider_id: provider1.id,
-  process_id: process.id
-})
+process_provider1 =
+  Repo.insert!(%ProcessProvider{
+    number_supplies_year: 280,
+    tons_by_supplies: 3.0,
+    goods_type: "Leche fluida",
+    transportation_mode: :automotor,
+    provider_id: provider1.id,
+    process_id: process.id
+  })
 
-process_provider2 = Repo.insert!(%ProcessProvider{
-  number_supplies_year: 25,
-  tons_by_supplies: 10.0,
-  goods_type: "Leche en polvo",
-  transportation_mode: :automotor,
-  provider_id: provider2.id,
-  process_id: process.id
-})
+process_provider2 =
+  Repo.insert!(%ProcessProvider{
+    number_supplies_year: 25,
+    tons_by_supplies: 10.0,
+    goods_type: "Leche en polvo",
+    transportation_mode: :automotor,
+    provider_id: provider2.id,
+    process_id: process.id
+  })
 
 # Provider evaluations
 Repo.insert!(%ProviderEvaluation{
@@ -126,7 +126,26 @@ Repo.insert!(%ProviderEvaluation{
   process_provider_id: process_provider2.id
 })
 
+# Transportation schemas for providers on a process
+Repo.insert!(%TransportationSchema{
+  using_own: 20,
+  using_provider: 80,
+  using_third: 0,
+  process_provider_id: process_provider1.id
+})
+
+Repo.insert!(%TransportationSchema{
+  using_own: 0,
+  using_provider: 0,
+  using_third: 100,
+  process_provider_id: process_provider2.id
+})
+
 # Users
-Accounts.register_user(%{"email" => "manuelmenendezalfonso@gmail.com", "password" => "123qweasdzxc"})
+Accounts.register_user(%{
+  "email" => "manuelmenendezalfonso@gmail.com",
+  "password" => "123qweasdzxc"
+})
+
 Accounts.register_user(%{"email" => "daniel@gmail.com", "password" => "123qweasdzxc"})
 Accounts.register_user(%{"email" => "monteagudo@gmail.com", "password" => "123qweasdzxc"})
