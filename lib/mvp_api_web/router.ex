@@ -47,6 +47,7 @@ defmodule MvpApiWeb.Router do
     get "/processes/:process_id/providers", ProviderController, :providers_of_process
     post "/processes/add_provider", ProviderController, :add_provider_to_process
     resources "/provider_evaluations", ProviderEvaluationController, except: [:new, :edit]
+    resources "/transportation_schemas", TransportationSchemaController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

@@ -192,4 +192,83 @@ defmodule MvpApi.ProvidersTest do
       assert %Ecto.Changeset{} = Providers.change_provider_evaluation(provider_evaluation)
     end
   end
+
+  describe "transportation_schemas" do
+    alias MvpApi.Providers.TransportationSchema
+
+    @valid_attrs %{using_own: "120.5", using_provider: "120.5", using_third: "120.5"}
+    @update_attrs %{using_own: "456.7", using_provider: "456.7", using_third: "456.7"}
+    @invalid_attrs %{using_own: nil, using_provider: nil, using_third: nil}
+
+    def transportation_schema_fixture(attrs \\ %{}) do
+      {:ok, transportation_schema} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Providers.create_transportation_schema()
+
+      transportation_schema
+    end
+
+    test "list_transportation_schemas/0 returns all transportation_schemas" do
+      transportation_schema = transportation_schema_fixture()
+      assert Providers.list_transportation_schemas() == [transportation_schema]
+    end
+
+    test "get_transportation_schema!/1 returns the transportation_schema with given id" do
+      transportation_schema = transportation_schema_fixture()
+
+      assert Providers.get_transportation_schema!(transportation_schema.id) ==
+               transportation_schema
+    end
+
+    test "create_transportation_schema/1 with valid data creates a transportation_schema" do
+      assert {:ok, %TransportationSchema{} = transportation_schema} =
+               Providers.create_transportation_schema(@valid_attrs)
+
+      assert transportation_schema.using_own == Decimal.new("120.5")
+      assert transportation_schema.using_provider == Decimal.new("120.5")
+      assert transportation_schema.using_third == Decimal.new("120.5")
+    end
+
+    test "create_transportation_schema/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Providers.create_transportation_schema(@invalid_attrs)
+    end
+
+    test "update_transportation_schema/2 with valid data updates the transportation_schema" do
+      transportation_schema = transportation_schema_fixture()
+
+      assert {:ok, %TransportationSchema{} = transportation_schema} =
+               Providers.update_transportation_schema(transportation_schema, @update_attrs)
+
+      assert transportation_schema.using_own == Decimal.new("456.7")
+      assert transportation_schema.using_provider == Decimal.new("456.7")
+      assert transportation_schema.using_third == Decimal.new("456.7")
+    end
+
+    test "update_transportation_schema/2 with invalid data returns error changeset" do
+      transportation_schema = transportation_schema_fixture()
+
+      assert {:error, %Ecto.Changeset{}} =
+               Providers.update_transportation_schema(transportation_schema, @invalid_attrs)
+
+      assert transportation_schema ==
+               Providers.get_transportation_schema!(transportation_schema.id)
+    end
+
+    test "delete_transportation_schema/1 deletes the transportation_schema" do
+      transportation_schema = transportation_schema_fixture()
+
+      assert {:ok, %TransportationSchema{}} =
+               Providers.delete_transportation_schema(transportation_schema)
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Providers.get_transportation_schema!(transportation_schema.id)
+      end
+    end
+
+    test "change_transportation_schema/1 returns a transportation_schema changeset" do
+      transportation_schema = transportation_schema_fixture()
+      assert %Ecto.Changeset{} = Providers.change_transportation_schema(transportation_schema)
+    end
+  end
 end
