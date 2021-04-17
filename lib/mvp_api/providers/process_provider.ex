@@ -3,9 +3,8 @@ defmodule MvpApi.Providers.ProcessProvider do
   import Ecto.Changeset
 
   alias MvpApi.Providers
-  alias MvpApi.Providers.Provider
+  alias MvpApi.Providers.{Provider, ProviderEvaluation, TransportationSchema}
   alias MvpApi.Processes.Process
-  alias MvpApi.Providers.ProviderEvaluation
 
   alias Numbers, as: N
 
@@ -36,6 +35,7 @@ defmodule MvpApi.Providers.ProcessProvider do
     belongs_to :process, Process
 
     has_one :provider_evaluation, ProviderEvaluation, on_replace: :delete
+    has_one :transportation_schemas, TransportationSchema, on_replace: :delete
   end
 
   @doc false
@@ -58,6 +58,7 @@ defmodule MvpApi.Providers.ProcessProvider do
       :provider_id
     ])
     |> cast_assoc(:provider_evaluation)
+    |> cast_assoc(:transportation_schemas)
     |> foreign_key_constraint(:process_id)
     |> foreign_key_constraint(:provider_id)
     |> unique_constraint([:provider_id, :process_id],
