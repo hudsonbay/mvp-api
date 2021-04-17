@@ -14,7 +14,6 @@ defmodule MvpApiWeb.ProviderEvaluationView do
   def render("provider_evaluation.json", %{provider_evaluation: provider_evaluation}) do
     %{
       id: provider_evaluation.id,
-      process_provider_id: provider_evaluation.process_provider_id,
       punctuality: provider_evaluation.punctuality,
       punctuality_weighing: provider_evaluation.punctuality_weighing,
       quality: provider_evaluation.quality,
