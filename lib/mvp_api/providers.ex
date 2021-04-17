@@ -110,24 +110,9 @@ defmodule MvpApi.Providers do
   """
 
   def get_providers_of_process(process_id) do
-    Repo.all(
-      from pp in ProcessProvider,
-        where: pp.process_id == ^process_id,
-        join: provider in "providers",
-        on: pp.provider_id == provider.id,
-        select: %{
-          id: pp.id,
-          process_id: pp.process_id,
-          provider_id: pp.provider_id,
-          provider_name: provider.name,
-          distance_km: provider.distance_km,
-          location: provider.location,
-          goods_type: pp.goods_type,
-          number_supplies_year: pp.number_supplies_year,
-          tons_by_supplies: pp.tons_by_supplies,
-          transportation_mode: pp.transportation_mode
-        }
-    )
+    ProcessProvider
+    |> Repo.all(process_id: process_id)
+    |> Repo.preload([:provider_evaluation, :process, :provider, :transportation_schemas])
   end
 
   @doc """
@@ -139,7 +124,13 @@ defmodule MvpApi.Providers do
     |> Repo.insert()
     |> case do
       {:ok, %ProcessProvider{} = process_provider} ->
-        {:ok, Repo.preload(process_provider, [:process, :provider, :provider_evaluation])}
+        {:ok,
+         Repo.preload(process_provider, [
+           :process,
+           :provider,
+           :provider_evaluation,
+           :transportation_schemas
+         ])}
 
       error ->
         error
@@ -177,7 +168,7 @@ defmodule MvpApi.Providers do
   """
   def get_provider_evaluation!(id), do: Repo.get!(ProviderEvaluation, id)
 
-   @doc """
+  @doc """
   Gets a provider_evaluation from a provider in a process
 
   Raises `Ecto.NoResultsError` if the Provider evaluation does not exist.
@@ -191,7 +182,8 @@ defmodule MvpApi.Providers do
       ** (Ecto.NoResultsError)
 
   """
-  def get_provider_evaluation_process_provider!(id), do: ProviderEvaluation |> Repo.get_by!(process_provider_id: id)
+  def get_provider_evaluation_process_provider!(id),
+    do: ProviderEvaluation |> Repo.get_by!(process_provider_id: id)
 
   @doc """
   Creates a provider_evaluation.
@@ -256,5 +248,121 @@ defmodule MvpApi.Providers do
   """
   def change_provider_evaluation(%ProviderEvaluation{} = provider_evaluation, attrs \\ %{}) do
     ProviderEvaluation.changeset(provider_evaluation, attrs)
+  end
+
+  alias MvpApi.Providers.TransportationSchema
+
+  @doc """
+  Returns the list of transportation_schemas.
+
+  ## Examples
+
+      iex> list_transportation_schemas()
+      [%TransportationSchema{}, ...]
+
+  """
+  def list_transportation_schemas do
+    Repo.all(TransportationSchema)
+  end
+
+  @doc """
+  Gets a single transportation_schema.
+
+  Raises `Ecto.NoResultsError` if the Transportation schema does not exist.
+
+  ## Examples
+
+      iex> get_transportation_schema!(123)
+      %TransportationSchema{}
+
+      iex> get_transportation_schema!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_transportation_schema!(id), do: Repo.get!(TransportationSchema, id)
+
+  @doc """
+  Gets a provider_evaluation from a provider in a process
+
+  Raises `Ecto.NoResultsError` if the Provider evaluation does not exist.
+
+  ## Examples
+
+      iex> get_provider_evaluation_process_provider!(123)
+      %ProviderEvaluation{}
+
+      iex> get_provider_evaluation_process_provider!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_transportation_schema_process_provider!(id),
+    do:
+      TransportationSchema
+      |> Repo.get_by!(process_provider_id: id)
+      |> Repo.preload(:process_provider)
+
+  @doc """
+  Creates a transportation_schema.
+
+  ## Examples
+
+      iex> create_transportation_schema(%{field: value})
+      {:ok, %TransportationSchema{}}
+
+      iex> create_transportation_schema(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_transportation_schema(attrs \\ %{}) do
+    %TransportationSchema{}
+    |> TransportationSchema.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a transportation_schema.
+
+  ## Examples
+
+      iex> update_transportation_schema(transportation_schema, %{field: new_value})
+      {:ok, %TransportationSchema{}}
+
+      iex> update_transportation_schema(transportation_schema, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_transportation_schema(%TransportationSchema{} = transportation_schema, attrs) do
+    transportation_schema
+    |> TransportationSchema.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a transportation_schema.
+
+  ## Examples
+
+      iex> delete_transportation_schema(transportation_schema)
+      {:ok, %TransportationSchema{}}
+
+      iex> delete_transportation_schema(transportation_schema)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_transportation_schema(%TransportationSchema{} = transportation_schema) do
+    Repo.delete(transportation_schema)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking transportation_schema changes.
+
+  ## Examples
+
+      iex> change_transportation_schema(transportation_schema)
+      %Ecto.Changeset{data: %TransportationSchema{}}
+
+  """
+  def change_transportation_schema(%TransportationSchema{} = transportation_schema, attrs \\ %{}) do
+    TransportationSchema.changeset(transportation_schema, attrs)
   end
 end
