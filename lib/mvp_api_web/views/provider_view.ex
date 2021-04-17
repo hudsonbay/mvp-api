@@ -1,6 +1,6 @@
 defmodule MvpApiWeb.ProviderView do
   use MvpApiWeb, :view
-  alias MvpApiWeb.ProviderView
+  alias MvpApiWeb.{ProviderView, ProcessView, ProviderEvaluationView, TransportationSchemaView}
   alias MvpApi.Providers.Formulas
 
   def render("index.json", %{providers: providers}) do
@@ -33,35 +33,27 @@ defmodule MvpApiWeb.ProviderView do
 
   def render("process_provider.json", %{process_provider: process_provider}) do
     %{
+      provider: render_one(process_provider.provider, ProviderView, "provider.json"),
+      process: render_one(process_provider.process, ProcessView, "process.json"),
+      provider_evaluation:
+        render_one(
+          process_provider.provider_evaluation,
+          ProviderEvaluationView,
+          "provider_evaluation.json"
+        ),
+      transportation_schema:
+        render_one(
+          process_provider.transportation_schemas,
+          TransportationSchemaView,
+          "transportation_schema.json"
+        ),
       process_provider_id: process_provider.id,
-      process_id: process_provider.process_id,
-      provider_id: process_provider.provider_id,
-      provider_name: process_provider.provider_name,
       goods_type: process_provider.goods_type,
       number_supplies_year: process_provider.number_supplies_year,
       tons_by_supplies: process_provider.tons_by_supplies,
-      distance_km: process_provider.distance_km,
-      location: process_provider.location,
       transportation_mode: process_provider.transportation_mode,
       anual_transportation_volume:
         Formulas.calculate_anual_transportation_volume(process_provider)
-    }
-  end
-
-  def render("inserted_provider_to_process.json", %{process_provider: process_provider}) do
-    %{
-      process_provider_id: process_provider.id,
-      process_id: process_provider.process.id,
-      provider_id: process_provider.provider.id,
-      provider_name: process_provider.provider.name,
-      goods_type: process_provider.goods_type,
-      number_supplies_year: process_provider.number_supplies_year,
-      tons_by_supplies: process_provider.tons_by_supplies,
-      distance_km: process_provider.provider.distance_km,
-      location: process_provider.provider.location,
-      transportation_mode: process_provider.transportation_mode,
-      anual_transportation_volume: process_provider.anual_transportation_volume,
-      # evaluation: render_one(process_provider.provider_evaluation, ProviderEvaluationView, "provider_evaluation.json"),
     }
   end
 end
