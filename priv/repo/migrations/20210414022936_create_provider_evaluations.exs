@@ -18,7 +18,6 @@ defmodule MvpApi.Repo.Migrations.CreateProviderEvaluations do
       add(
         :process_provider_id,
         references(:process_providers, on_delete: :delete_all, type: :binary_id),
-        primary_key: true,
         null: false
       )
 
