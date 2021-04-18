@@ -24,6 +24,10 @@ defmodule MvpApiWeb.ProviderView do
     %{
       total_anual_transportation_volume:
         Formulas.calculate_total_anual_transportation_volume(providers_of_process),
+      total_transportation_cost_using_third_party_providers:
+        Formulas.calculate_total_transportation_cost_using_third_party_providers(
+          providers_of_process
+        ),
       data:
         render_many(providers_of_process, ProviderView, "process_provider.json",
           as: :process_provider
@@ -47,12 +51,8 @@ defmodule MvpApiWeb.ProviderView do
           TransportationSchemaView,
           "transportation_schema.json"
         ),
-      # %{
-      #   id: process_provider.transportation_schemas.id,
-      #   using_own_percentage: process_provider.transportation_schemas.using_own,
-      #   using_provider_percentage: process_provider.transportation_schemas.using_provider,
-      #   using_third_percentage: process_provider.transportation_schemas.using_third
-      # },
+      transportation_cost_using_third_party_providers:
+        Formulas.calculate_transportation_cost_using_third_party_providers(process_provider),
       process_provider_id: process_provider.id,
       goods_type: process_provider.goods_type,
       number_supplies_year: process_provider.number_supplies_year,
