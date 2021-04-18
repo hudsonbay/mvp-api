@@ -2,7 +2,7 @@ defmodule MvpApi.Providers.TransportationSchema do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # alias Numbers, as: N
+  alias Numbers, as: N
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -22,25 +22,26 @@ defmodule MvpApi.Providers.TransportationSchema do
     |> cast(attrs, [:using_own, :using_provider, :using_third, :process_provider_id])
     |> validate_required([:using_own, :using_provider, :using_third, :process_provider_id])
     |> assoc_constraint(:process_provider)
-    |> validate_number(:using_own, greater_than_or_equal_to: 0,  less_than_or_equal_to: 100)
+    |> validate_number(:using_own, greater_than_or_equal_to: 0, less_than_or_equal_to: 100)
     |> validate_number(:using_provider, greater_than_or_equal_to: 0, less_than_or_equal_to: 100)
     |> validate_number(:using_third, greater_than_or_equal_to: 0, less_than_or_equal_to: 100)
-    # |> validate_sum_100()
+    |> validate_sum_100()
   end
 
-  #TODO validate_sum_100()
-  # defp validate_sum_100(changeset) do
-  #   using_own = get_field(changeset, :using_own)
-  #   using_provider = get_field(changeset, :using_provider)
-  #   using_third = get_field(changeset, :using_third)
+  @doc """
+  Function that validates that the 3 percentages sum 100%
+  """
+  defp validate_sum_100(changeset) do
+    using_own = get_field(changeset, :using_own)
+    using_provider = get_field(changeset, :using_provider)
+    using_third = get_field(changeset, :using_third)
 
-  #   sum = using_own |> N.add(using_provider) |> N.add(using_third)
+    sum = using_own |> N.add(using_provider) |> N.add(using_third)
 
-  #   put_change(changeset, :sum, sum)
-
-  #   IO.puts(get_field(changeset, :sum))
-
-  #   validate_number(changeset, :sum, equal_to: 100)
-  # end
-
+    if Decimal.equal?(sum, 100) do
+       changeset
+    else
+      add_error(changeset, :sum, "Must be equal to 100")
+    end
+  end
 end

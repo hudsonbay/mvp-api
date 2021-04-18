@@ -47,6 +47,12 @@ defmodule MvpApiWeb.ProviderView do
           TransportationSchemaView,
           "transportation_schema.json"
         ),
+      # %{
+      #   id: process_provider.transportation_schemas.id,
+      #   using_own_percentage: process_provider.transportation_schemas.using_own,
+      #   using_provider_percentage: process_provider.transportation_schemas.using_provider,
+      #   using_third_percentage: process_provider.transportation_schemas.using_third
+      # },
       process_provider_id: process_provider.id,
       goods_type: process_provider.goods_type,
       number_supplies_year: process_provider.number_supplies_year,
