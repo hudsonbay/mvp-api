@@ -1,9 +1,11 @@
 /* This file is for your main application css. */
-@tailwind base;
+@import "tailwindcss/base";
 
-@tailwind components;
+@import "tailwindcss/components";
 
-@tailwind utilities;
+@import "tailwindcss/utilities";
+
+@import "./components/buttons.scss";
 
 @import "../node_modules/nprogress/nprogress.css";
 
