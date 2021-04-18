@@ -7,9 +7,9 @@ defmodule MvpApi.Providers.TransportationSchema do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "transportation_schemas" do
-    field :using_own, :decimal
-    field :using_provider, :decimal
-    field :using_third, :decimal
+    field :using_own, :decimal, default: 0
+    field :using_provider, :decimal, default: 0
+    field :using_third, :decimal, default: 0
     field :sum, :decimal, virtual: true, default: 0
     belongs_to :process_provider, MvpApi.Providers.ProcessProvider
 
@@ -28,9 +28,6 @@ defmodule MvpApi.Providers.TransportationSchema do
     |> validate_sum_100()
   end
 
-  @doc """
-  Function that validates that the 3 percentages sum 100%
-  """
   defp validate_sum_100(changeset) do
     using_own = get_field(changeset, :using_own)
     using_provider = get_field(changeset, :using_provider)
@@ -39,7 +36,7 @@ defmodule MvpApi.Providers.TransportationSchema do
     sum = using_own |> N.add(using_provider) |> N.add(using_third)
 
     if Decimal.equal?(sum, 100) do
-       changeset
+      changeset
     else
       add_error(changeset, :sum, "Must be equal to 100")
     end
