@@ -60,7 +60,7 @@ defmodule MvpApi.Providers.Formulas do
     process_providers
     |> Enum.map(fn x ->
       calculate_transportation_cost_using_third_party_providers(x)
-      |> Decimal.to_float()
+      |> N.to_float()
     end)
     |> Enum.sum()
   end
