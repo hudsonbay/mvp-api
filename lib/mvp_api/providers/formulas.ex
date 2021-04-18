@@ -35,6 +35,10 @@ defmodule MvpApi.Providers.Formulas do
          provider_evaluation.quantity_weighing)
   end
 
+  @doc """
+  Calculates the transportation cost using third party providers. If the process provider has no
+  transportation schemas asigned then return 0.
+  """
   def calculate_transportation_cost_using_third_party_providers(process_provider) do
     case process_provider.transportation_schemas do
       %MvpApi.Providers.TransportationSchema{} ->
