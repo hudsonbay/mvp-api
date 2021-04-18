@@ -34,4 +34,30 @@ defmodule MvpApi.Providers.Formulas do
          provider_evaluation.credit_weighing + provider_evaluation.relations_weighing +
          provider_evaluation.quantity_weighing)
   end
+
+  def calculate_transportation_cost_using_third_party_providers(process_provider) do
+    case process_provider.transportation_schemas do
+      %MvpApi.Providers.TransportationSchema{} ->
+        transportation_rate = 0.25
+        anual_transportation_volume = calculate_anual_transportation_volume(process_provider)
+        percentage = N.div(process_provider.transportation_schemas.using_third, 100)
+
+        anual_transportation_volume_using_third_party_providers =
+          percentage |> N.mult(anual_transportation_volume)
+
+        N.mult(transportation_rate, anual_transportation_volume_using_third_party_providers)
+
+      nil ->
+        0
+    end
+  end
+
+  def calculate_total_transportation_cost_using_third_party_providers(process_providers) do
+    process_providers
+    |> Enum.map(fn x ->
+      calculate_transportation_cost_using_third_party_providers(x)
+      |> Decimal.to_float()
+    end)
+    |> Enum.sum()
+  end
 end
