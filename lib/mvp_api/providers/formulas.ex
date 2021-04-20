@@ -5,8 +5,9 @@ defmodule MvpApi.Providers.Formulas do
   Calculates the anual transportation volume of a single provider
   """
   def calculate_anual_transportation_volume(process_provider) do
-    process_provider.tons_by_supplies * process_provider.number_supplies_year *
-      process_provider.provider.distance_km
+    Decimal.from_float(process_provider.tons_by_supplies)
+    |> N.mult(process_provider.number_supplies_year)
+    |> N.mult(process_provider.provider.distance_km)
   end
 
   @doc """
@@ -38,7 +39,7 @@ defmodule MvpApi.Providers.Formulas do
   def calculate_transportation_cost_using_third_party_providers(process_provider) do
     case process_provider.transportation_schemas do
       %MvpApi.Providers.TransportationSchema{} ->
-        transportation_rate = 0.25
+        transportation_rate = Decimal.from_float(0.25)
         anual_transportation_volume = calculate_anual_transportation_volume(process_provider)
         percentage = N.div(process_provider.transportation_schemas.using_third, 100)
 
