@@ -6,8 +6,8 @@ defmodule MvpApi.Providers.Formulas do
   """
   def calculate_anual_transportation_volume(process_provider) do
     Decimal.from_float(process_provider.tons_by_supplies)
-    |> N.mult(process_provider.number_supplies_year)
-    |> N.mult(process_provider.provider.distance_km)
+    |> Decimal.mult(process_provider.number_supplies_year)
+    |> Decimal.mult(process_provider.provider.distance_km)
   end
 
   @doc """
