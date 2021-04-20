@@ -57,3 +57,7 @@ config :kaffy,
       ]
     ]
   ]
+
+# Set a default currency
+config :money,
+  default_currency: :CUP
