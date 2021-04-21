@@ -58,13 +58,12 @@ config :kaffy,
     ]
   ]
 
-# Set a default currency
-config :money,
-  default_currency: :CUP,
-  separator: ".",
-  delimiter: ",",
-  symbol: false,
-  symbol_on_right: false,
-  symbol_space: false,
-  fractional_unit: true,
-  strip_insignificant_zeros: false
+config :ex_money,
+  auto_start_exchange_rate_service.: false,
+  exchange_rates_retrieve_every: 300_000,
+  api_module: Money.ExchangeRates.OpenExchangeRates,
+  callback_module: Money.ExchangeRates.Callback,
+  retriever_options: nil,
+  log_failure: :warn,
+  log_info: :info,
+  log_success: nil
