@@ -210,9 +210,10 @@ defmodule MvpApi.Client do
   end
 
   def get_factors(product_id) do
-    Ecto.Adapters.SQL.query(
-      Repo,
-      "SELECT value , weighing  FROM factors WHERE factors.product_id = ^product_id"
-    )
+    # Ecto.Adapters.SQL.query(
+    #   Repo,
+    #   "SELECT value , weighing  FROM factors WHERE factors.product_id = ^product_id"
+    # )
+    Factor |> Repo.get_by!(product_id)
   end
 end

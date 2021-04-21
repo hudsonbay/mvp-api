@@ -59,7 +59,7 @@ config :kaffy,
   ]
 
 config :ex_money,
-  auto_start_exchange_rate_service.: false,
+  auto_start_exchange_rate_service: false,
   exchange_rates_retrieve_every: 300_000,
   api_module: Money.ExchangeRates.OpenExchangeRates,
   callback_module: Money.ExchangeRates.Callback,
