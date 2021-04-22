@@ -5,7 +5,7 @@ defmodule MvpApi.Knowledge.InnovationProject do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "innovation_projects" do
-    field :budget, :decimal
+    field :budget, Money.Ecto.Composite.Type
     field :expected_anual_effect, :decimal
     field :expected_result, :string
     field :name, :string
