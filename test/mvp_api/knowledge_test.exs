@@ -7,7 +7,7 @@ defmodule MvpApi.KnowledgeTest do
     alias MvpApi.Knowledge.InnovationProject
 
     @valid_attrs %{
-      budget: "120.5",
+      budget: Money.new!(:CUP, "120.5"),
       expected_annual_effect: "120.5",
       expected_result: "some expected_result",
       name: "some name",
@@ -16,7 +16,7 @@ defmodule MvpApi.KnowledgeTest do
       term: "120.5"
     }
     @update_attrs %{
-      budget: "456.7",
+      budget: Money.new!(:CUP, "456.7"),
       expected_annual_effect: "456.7",
       expected_result: "some updated expected_result",
       name: "some updated name",
@@ -57,7 +57,7 @@ defmodule MvpApi.KnowledgeTest do
       assert {:ok, %InnovationProject{} = innovation_project} =
                Knowledge.create_innovation_project(@valid_attrs)
 
-      assert innovation_project.budget == Decimal.new("120.5")
+      assert innovation_project.budget == Money.new!(:CUP, "120.5")
       assert innovation_project.expected_annual_effect == Decimal.new("120.5")
       assert innovation_project.expected_result == "some expected_result"
       assert innovation_project.name == "some name"
@@ -76,7 +76,7 @@ defmodule MvpApi.KnowledgeTest do
       assert {:ok, %InnovationProject{} = innovation_project} =
                Knowledge.update_innovation_project(innovation_project, @update_attrs)
 
-      assert innovation_project.budget == Decimal.new("456.7")
+      assert innovation_project.budget == Money.new!(:CUP, "456.7")
       assert innovation_project.expected_annual_effect == Decimal.new("456.7")
       assert innovation_project.expected_result == "some updated expected_result"
       assert innovation_project.name == "some updated name"

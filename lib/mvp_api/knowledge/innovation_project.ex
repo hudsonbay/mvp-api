@@ -6,13 +6,14 @@ defmodule MvpApi.Knowledge.InnovationProject do
   @foreign_key_type :binary_id
   schema "innovation_projects" do
     field :budget, Money.Ecto.Composite.Type
-    field :expected_annual_effect, :decimal
+    field :expected_annual_effect, Money.Ecto.Composite.Type
     field :expected_result, :string
     field :name, :string
     field :objective, :string
     field :observation, :string
     field :term, :decimal
-    field :annual_cost, Money.Ecto.Composite.Type, virtual: true
+    field :annual_cost, Money.Ecto.Composite.Type
+    field :payback_time, :decimal
 
     timestamps()
   end
@@ -38,6 +39,7 @@ defmodule MvpApi.Knowledge.InnovationProject do
       :expected_annual_effect
     ])
     |> calculate_annual_cost()
+    |> calculate_payback_time()
   end
 
   defp calculate_annual_cost(changeset) do
@@ -46,9 +48,13 @@ defmodule MvpApi.Knowledge.InnovationProject do
 
     with {:ok, cost} <- Money.div(budget, term) do
       put_change(changeset, :annual_cost, cost)
-    else
-      {:error,  reason} ->
-      add_error(changeset, :annual_cost, reason)
     end
+  end
+
+  defp calculate_payback_time(changeset) do
+    expected_annual_effect = get_change(changeset, :expected_annual_effect) |> Money.to_decimal()
+    budget = get_change(changeset, :budget) |> Money.to_decimal()
+
+    put_change(changeset, :payback_time, Decimal.div(budget, expected_annual_effect))
   end
 end

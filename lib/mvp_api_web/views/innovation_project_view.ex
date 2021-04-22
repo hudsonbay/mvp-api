@@ -21,7 +21,8 @@ defmodule MvpApiWeb.InnovationProjectView do
       term: innovation_project.term,
       expected_annual_effect: innovation_project.expected_annual_effect,
       observation: innovation_project.observation,
-      annual_cost: Formulas.calculate_annual_cost(innovation_project)
+      annual_cost: innovation_project.annual_cost,
+      payback_time: innovation_project.payback_time
     }
   end
 end

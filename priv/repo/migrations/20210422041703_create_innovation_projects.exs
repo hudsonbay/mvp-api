@@ -9,7 +9,9 @@ defmodule MvpApi.Repo.Migrations.CreateInnovationProjects do
       add :expected_result, :string, null: false
       add :budget, :money_with_currency, null: false
       add :term, :decimal, null: false
-      add :expected_annual_effect, :decimal, null: false
+      add :expected_annual_effect, :money_with_currency, null: false
+      add :annual_cost, :money_with_currency
+      add :payback_time, :decimal
       add :observation, :text
 
       timestamps()
