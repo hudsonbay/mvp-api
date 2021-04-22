@@ -12,10 +12,14 @@ defmodule MvpApiWeb.InnovationProjectController do
   end
 
   def create(conn, %{"innovation_project" => innovation_project_params}) do
-    with {:ok, %InnovationProject{} = innovation_project} <- Knowledge.create_innovation_project(innovation_project_params) do
+    with {:ok, %InnovationProject{} = innovation_project} <-
+           Knowledge.create_innovation_project(innovation_project_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.innovation_project_path(conn, :show, innovation_project))
+      |> put_resp_header(
+        "location",
+        Routes.innovation_project_path(conn, :show, innovation_project)
+      )
       |> render("show.json", innovation_project: innovation_project)
     end
   end
@@ -28,7 +32,8 @@ defmodule MvpApiWeb.InnovationProjectController do
   def update(conn, %{"id" => id, "innovation_project" => innovation_project_params}) do
     innovation_project = Knowledge.get_innovation_project!(id)
 
-    with {:ok, %InnovationProject{} = innovation_project} <- Knowledge.update_innovation_project(innovation_project, innovation_project_params) do
+    with {:ok, %InnovationProject{} = innovation_project} <-
+           Knowledge.update_innovation_project(innovation_project, innovation_project_params) do
       render(conn, "show.json", innovation_project: innovation_project)
     end
   end

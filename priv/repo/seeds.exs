@@ -17,6 +17,7 @@ alias MvpApi.Client.{Product, Factor}
 alias MvpApi.Accounts
 alias MvpApi.Processes.Process
 alias MvpApi.Providers.{Provider, ProcessProvider, ProviderEvaluation, TransportationSchema}
+alias MvpApi.Knowledge.InnovationProject
 
 # Products with factors
 for _ <- 0..10 do
@@ -139,6 +140,27 @@ Repo.insert!(%TransportationSchema{
   using_provider: 0,
   using_third: 100,
   process_provider_id: process_provider2.id
+})
+
+# Innovation projects
+Repo.insert!(%InnovationProject{
+  name: "Proyecto de tratamiento térmico",
+  objective: "Mejorar calidad",
+  expected_result: "Nueva tecnología",
+  budget: Money.new(:CUP, 30_000),
+  term: 2.5,
+  expected_annual_effect: 6500,
+  observation: "El proyecto esta bueno"
+})
+
+Repo.insert!(%InnovationProject{
+  name: "Proyecto forja en caliente",
+  objective: "Mejorar calidad",
+  expected_result: "Nueva tecnología",
+  budget: Money.new(:CUP, 7800),
+  term: 2,
+  expected_annual_effect: 1200,
+  observation: "El proyecto es de forja en caliente"
 })
 
 # Users

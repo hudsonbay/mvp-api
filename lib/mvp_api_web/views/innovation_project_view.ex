@@ -1,6 +1,7 @@
 defmodule MvpApiWeb.InnovationProjectView do
   use MvpApiWeb, :view
   alias MvpApiWeb.InnovationProjectView
+  alias MvpApi.Knowledge.InnovationProjects.Formulas
 
   def render("index.json", %{innovation_projects: innovation_projects}) do
     %{data: render_many(innovation_projects, InnovationProjectView, "innovation_project.json")}
@@ -11,13 +12,16 @@ defmodule MvpApiWeb.InnovationProjectView do
   end
 
   def render("innovation_project.json", %{innovation_project: innovation_project}) do
-    %{id: innovation_project.id,
+    %{
+      id: innovation_project.id,
       name: innovation_project.name,
       objective: innovation_project.objective,
       expected_result: innovation_project.expected_result,
       budget: innovation_project.budget,
       term: innovation_project.term,
-      expected_anual_effect: innovation_project.expected_anual_effect,
-      observation: innovation_project.observation}
+      expected_annual_effect: innovation_project.expected_annual_effect,
+      observation: innovation_project.observation,
+      annual_cost: Formulas.calculate_annual_cost(innovation_project)
+    }
   end
 end
