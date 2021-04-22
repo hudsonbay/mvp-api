@@ -66,4 +66,9 @@ config :ex_money,
   retriever_options: nil,
   log_failure: :warn,
   log_info: :info,
-  log_success: nil
+  log_success: nil,
+  json_library: Jason,
+  default_cldr_backend: MvpApi.Cldr
+
+config :ex_cldr,
+  json_library: Jason
