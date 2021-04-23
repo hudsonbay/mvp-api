@@ -9,7 +9,6 @@ defmodule MvpApi.Client.Formulas do
     sum =
       factors_list
       |> Enum.map(fn %{value: value, weighing: weighing} ->
-        # Decimal.mult(Decimal.new(value), Decimal.new(weighing))
         D.to_float(N.mult(value, weighing))
       end)
       |> Enum.sum()
