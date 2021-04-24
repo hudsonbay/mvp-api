@@ -16,7 +16,7 @@ Faker.start()
 alias MvpApi.Client.{Product, Factor}
 alias MvpApi.Accounts
 alias MvpApi.Processes.Process
-alias MvpApi.Providers.{Provider, ProcessProvider, ProviderEvaluation, TransportationSchema}
+alias MvpApi.Providers.{ProcessProvider, ProviderEvaluation, TransportationSchema}
 alias MvpApi.Knowledge
 
 # Products with factors
@@ -56,19 +56,18 @@ for _ <- 0..10 do
 end
 
 # Providers
-provider1 =
-  Repo.insert!(%Provider{
-    name: "ACINOX",
-    location: "La Lisa",
-    distance_km: 25
-  })
+provider1 = with {:ok, provider} <- MvpApi.Providers.create_provider(%{"name" => "ACINOX",
+"location" => "La Lisa",
+"distance_km" => 25}) do
+  provider
+end
 
-provider2 =
-  Repo.insert!(%Provider{
-    name: "Industria polígráfica",
-    location: "Cerro",
-    distance_km: 12
-  })
+
+provider2 = with {:ok, provider} <- MvpApi.Providers.create_provider(%{"name" => "Industria polígráfica",
+"location" => "Cerro",
+"distance_km" => 12}) do
+  provider
+end
 
 # Processes
 process =
