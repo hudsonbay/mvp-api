@@ -108,4 +108,65 @@ defmodule MvpApi.KnowledgeTest do
       assert %Ecto.Changeset{} = Knowledge.change_innovation_project(innovation_project)
     end
   end
+
+  describe "intangible_fixed_assets" do
+    alias MvpApi.Knowledge.IntangibleFixedAsset
+
+    @valid_attrs %{description: "some description", name: "some name"}
+    @update_attrs %{description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{description: nil, name: nil}
+
+    def intangible_fixed_asset_fixture(attrs \\ %{}) do
+      {:ok, intangible_fixed_asset} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Knowledge.create_intangible_fixed_asset()
+
+      intangible_fixed_asset
+    end
+
+    test "list_intangible_fixed_assets/0 returns all intangible_fixed_assets" do
+      intangible_fixed_asset = intangible_fixed_asset_fixture()
+      assert Knowledge.list_intangible_fixed_assets() == [intangible_fixed_asset]
+    end
+
+    test "get_intangible_fixed_asset!/1 returns the intangible_fixed_asset with given id" do
+      intangible_fixed_asset = intangible_fixed_asset_fixture()
+      assert Knowledge.get_intangible_fixed_asset!(intangible_fixed_asset.id) == intangible_fixed_asset
+    end
+
+    test "create_intangible_fixed_asset/1 with valid data creates a intangible_fixed_asset" do
+      assert {:ok, %IntangibleFixedAsset{} = intangible_fixed_asset} = Knowledge.create_intangible_fixed_asset(@valid_attrs)
+      assert intangible_fixed_asset.description == "some description"
+      assert intangible_fixed_asset.name == "some name"
+    end
+
+    test "create_intangible_fixed_asset/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Knowledge.create_intangible_fixed_asset(@invalid_attrs)
+    end
+
+    test "update_intangible_fixed_asset/2 with valid data updates the intangible_fixed_asset" do
+      intangible_fixed_asset = intangible_fixed_asset_fixture()
+      assert {:ok, %IntangibleFixedAsset{} = intangible_fixed_asset} = Knowledge.update_intangible_fixed_asset(intangible_fixed_asset, @update_attrs)
+      assert intangible_fixed_asset.description == "some updated description"
+      assert intangible_fixed_asset.name == "some updated name"
+    end
+
+    test "update_intangible_fixed_asset/2 with invalid data returns error changeset" do
+      intangible_fixed_asset = intangible_fixed_asset_fixture()
+      assert {:error, %Ecto.Changeset{}} = Knowledge.update_intangible_fixed_asset(intangible_fixed_asset, @invalid_attrs)
+      assert intangible_fixed_asset == Knowledge.get_intangible_fixed_asset!(intangible_fixed_asset.id)
+    end
+
+    test "delete_intangible_fixed_asset/1 deletes the intangible_fixed_asset" do
+      intangible_fixed_asset = intangible_fixed_asset_fixture()
+      assert {:ok, %IntangibleFixedAsset{}} = Knowledge.delete_intangible_fixed_asset(intangible_fixed_asset)
+      assert_raise Ecto.NoResultsError, fn -> Knowledge.get_intangible_fixed_asset!(intangible_fixed_asset.id) end
+    end
+
+    test "change_intangible_fixed_asset/1 returns a intangible_fixed_asset changeset" do
+      intangible_fixed_asset = intangible_fixed_asset_fixture()
+      assert %Ecto.Changeset{} = Knowledge.change_intangible_fixed_asset(intangible_fixed_asset)
+    end
+  end
 end

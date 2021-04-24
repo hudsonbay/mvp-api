@@ -42,7 +42,10 @@ defmodule MvpApiWeb.Router do
       resources "/factors", FactorController, except: [:new, :edit]
     end
 
+    # admin endpoints
     resources "/admin/providers", ProviderController, except: [:new, :edit]
+    resources "/admin/intangible_fixed_assets", IntangibleFixedAssetController, except: [:new, :edit]
+
     resources "/processes", ProcessController, except: [:new, :edit]
     get "/processes/:process_id/providers", ProviderController, :providers_of_process
     post "/processes/add_provider", ProviderController, :add_provider_to_process
