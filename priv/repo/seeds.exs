@@ -56,18 +56,25 @@ for _ <- 0..10 do
 end
 
 # Providers
-provider1 = with {:ok, provider} <- MvpApi.Providers.create_provider(%{"name" => "ACINOX",
-"location" => "La Lisa",
-"distance_km" => 25}) do
-  provider
-end
+provider1 =
+  with {:ok, provider} <-
+         MvpApi.Providers.create_provider(%{
+           "name" => "ACINOX",
+           "location" => "La Lisa",
+           "distance_km" => 25
+         }) do
+    provider
+  end
 
-
-provider2 = with {:ok, provider} <- MvpApi.Providers.create_provider(%{"name" => "Industria polígráfica",
-"location" => "Cerro",
-"distance_km" => 12}) do
-  provider
-end
+provider2 =
+  with {:ok, provider} <-
+         MvpApi.Providers.create_provider(%{
+           "name" => "Industria polígráfica",
+           "location" => "Cerro",
+           "distance_km" => 12
+         }) do
+    provider
+  end
 
 # Processes
 process =
