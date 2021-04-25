@@ -211,7 +211,7 @@ Knowledge.create_intangible_fixed_asset_process(%{
   "amount" => 1,
   "dedicated_percentage" => Decimal.new(100),
   "initial_value" => Money.new(:CUP, 23_560),
-  "depreciation_rate" => Decimal.new(20),
+  "depreciation_rate" => Decimal.new(30),
   "process_id" => process.id,
   "intangible_fixed_asset_id" => ifa4.id
 })
