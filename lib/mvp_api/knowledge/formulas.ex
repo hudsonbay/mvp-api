@@ -1,5 +1,12 @@
 defmodule MvpApi.Knowledge.Formulas do
+  @moduledoc """
+  Formulas for the Knowledge context
+  """
+
   defmodule InnovationProject do
+    @moduledoc """
+    Formulas related to innovation projects
+    """
     def total_expected_annual_effect(innovation_projects) do
       sum =
         innovation_projects
@@ -46,6 +53,9 @@ defmodule MvpApi.Knowledge.Formulas do
   end
 
   defmodule IntangibleFixedAsset do
+    @moduledoc """
+    Formulas for Intangible Fixed Assets
+    """
     def total_annual_amortization(intangible_fixed_assets_processes) do
       sum =
         intangible_fixed_assets_processes
