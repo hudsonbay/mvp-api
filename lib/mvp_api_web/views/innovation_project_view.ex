@@ -1,14 +1,14 @@
 defmodule MvpApiWeb.InnovationProjectView do
   use MvpApiWeb, :view
   alias MvpApiWeb.InnovationProjectView
-  alias MvpApi.Knowledge.InnovationProjects.Formulas
+  alias MvpApi.Knowledge.Formulas.InnovationProject
 
   def render("index.json", %{innovation_projects: innovation_projects}) do
     %{
-      total_expected_annual_effect: Formulas.total_expected_annual_effect(innovation_projects),
-      total_annual_cost: Formulas.total_annual_cost(innovation_projects),
-      total_budget: Formulas.total_budget(innovation_projects),
-      total_payback_time: Formulas.total_payback_time(innovation_projects),
+      total_expected_annual_effect: InnovationProject.total_expected_annual_effect(innovation_projects),
+      total_annual_cost: InnovationProject.total_annual_cost(innovation_projects),
+      total_budget: InnovationProject.total_budget(innovation_projects),
+      total_payback_time: InnovationProject.total_payback_time(innovation_projects),
       data: render_many(innovation_projects, InnovationProjectView, "innovation_project.json")
     }
   end
