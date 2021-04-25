@@ -43,3 +43,16 @@ defmodule MvpApi.Knowledge.InnovationProjects.Formulas do
     Decimal.div(total_budget, total_expected_annual_effect)
   end
 end
+
+defmodule MvpApi.Knowledge.IntangibleFixedAsset.Formulas do
+  def total_annual_amortization(intangible_fixed_assets_processes) do
+    sum =
+      intangible_fixed_assets_processes
+      |> Enum.map(fn %{annual_amortization: annual_amortization} -> annual_amortization end)
+      |> Money.sum()
+
+    with {:ok, total} <- sum do
+      total
+    end
+  end
+end

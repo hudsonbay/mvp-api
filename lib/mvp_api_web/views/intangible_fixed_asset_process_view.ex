@@ -1,9 +1,11 @@
 defmodule MvpApiWeb.IntangibleFixedAssetProcessView do
   use MvpApiWeb, :view
   alias MvpApiWeb.IntangibleFixedAssetProcessView
+  alias MvpApi.Knowledge.IntangibleFixedAsset.Formulas
 
   def render("index.json", %{intangible_fixed_assets_processes: intangible_fixed_assets_processes}) do
     %{
+      total_annual_amortization: Formulas.total_annual_amortization(intangible_fixed_assets_processes),
       data:
         render_many(
           intangible_fixed_assets_processes,
