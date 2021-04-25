@@ -19,7 +19,7 @@ defmodule MvpApi.Processes do
   """
   def list_processes do
     Repo.all(Process)
-    |> Repo.preload(:providers)
+    # |> Repo.preload([:providers, :intangible_fixed_assets])
   end
 
   @doc """
