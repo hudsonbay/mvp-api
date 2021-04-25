@@ -18,6 +18,7 @@ alias MvpApi.Accounts
 alias MvpApi.Processes.Process
 alias MvpApi.Providers.{ProcessProvider, ProviderEvaluation, TransportationSchema}
 alias MvpApi.Knowledge
+alias MvpApi.Knowledge.{IntangibleFixedAsset}
 
 # Products with factors
 for _ <- 0..10 do
@@ -170,14 +171,50 @@ Knowledge.create_innovation_project(%{
 })
 
 # Intangible fixed assets list
-ifa3 = Knowledge.create_intangible_fixed_asset(%{"name" => "Software"})
-ifa2 = Knowledge.create_intangible_fixed_asset((%{"name" => "Patentes"}))
-ifa1 = Knowledge.create_intangible_fixed_asset((%{"name" => "Registros de marcas"}))
-Knowledge.create_intangible_fixed_asset(%{"name" => "Derechos de autor"})
-Knowledge.create_intangible_fixed_asset(%{"name" => "Registros de modelos industriales"})
-Knowledge.create_intangible_fixed_asset(%{"name" => "Registro de sistemas organizacionales"})
-ifa4 = Knowledge.create_intangible_fixed_asset(%{"name" => "Registros de procedimientos"})
-Knowledge.create_intangible_fixed_asset(%{"name" => "Otros elementos de la propiedad intelectual"})
+ifa3 = Repo.insert!(%IntangibleFixedAsset{name: "Software"})
+ifa2 = Repo.insert!(%IntangibleFixedAsset{name: "Patentes"})
+ifa1 = Repo.insert!(%IntangibleFixedAsset{name: "Registros de marcas"})
+Repo.insert!(%IntangibleFixedAsset{name: "Derechos de autor"})
+Repo.insert!(%IntangibleFixedAsset{name: "Registros de modelos industriales"})
+Repo.insert!(%IntangibleFixedAsset{name: "Registro de sistemas organizacionales"})
+ifa4 = Repo.insert!(%IntangibleFixedAsset{name: "Registros de procedimientos"})
+Repo.insert!(%IntangibleFixedAsset{name: "Otros elementos de la propiedad intelectual"})
+
+Knowledge.create_intangible_fixed_asset_process(%{
+  "amount" => 1,
+  "dedicated_percentage" => Decimal.new(100),
+  "initial_value" => Money.new(:CUP, 23_000),
+  "depreciation_rate" => Decimal.new(30),
+  "process_id" => process.id,
+  "intangible_fixed_asset_id" => ifa1.id
+})
+
+Knowledge.create_intangible_fixed_asset_process(%{
+  "amount" => 1,
+  "dedicated_percentage" => Decimal.new(50),
+  "initial_value" => Money.new(:CUP, 27_800),
+  "depreciation_rate" => Decimal.new(20),
+  "process_id" => process.id,
+  "intangible_fixed_asset_id" => ifa2.id
+})
+
+Knowledge.create_intangible_fixed_asset_process(%{
+  "amount" => 2,
+  "dedicated_percentage" => Decimal.new(35),
+  "initial_value" => Money.new(:CUP, 35_000),
+  "depreciation_rate" => Decimal.new(20),
+  "process_id" => process.id,
+  "intangible_fixed_asset_id" => ifa3.id
+})
+
+Knowledge.create_intangible_fixed_asset_process(%{
+  "amount" => 1,
+  "dedicated_percentage" => Decimal.new(100),
+  "initial_value" => Money.new(:CUP, 23_560),
+  "depreciation_rate" => Decimal.new(20),
+  "process_id" => process.id,
+  "intangible_fixed_asset_id" => ifa4.id
+})
 
 # Users
 Accounts.register_user(%{

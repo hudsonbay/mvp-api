@@ -32,7 +32,11 @@ defmodule MvpApiWeb.IntangibleFixedAssetControllerTest do
 
   describe "create intangible_fixed_asset" do
     test "renders intangible_fixed_asset when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.intangible_fixed_asset_path(conn, :create), intangible_fixed_asset: @create_attrs)
+      conn =
+        post(conn, Routes.intangible_fixed_asset_path(conn, :create),
+          intangible_fixed_asset: @create_attrs
+        )
+
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.intangible_fixed_asset_path(conn, :show, id))
@@ -45,7 +49,11 @@ defmodule MvpApiWeb.IntangibleFixedAssetControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.intangible_fixed_asset_path(conn, :create), intangible_fixed_asset: @invalid_attrs)
+      conn =
+        post(conn, Routes.intangible_fixed_asset_path(conn, :create),
+          intangible_fixed_asset: @invalid_attrs
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -53,8 +61,15 @@ defmodule MvpApiWeb.IntangibleFixedAssetControllerTest do
   describe "update intangible_fixed_asset" do
     setup [:create_intangible_fixed_asset]
 
-    test "renders intangible_fixed_asset when data is valid", %{conn: conn, intangible_fixed_asset: %IntangibleFixedAsset{id: id} = intangible_fixed_asset} do
-      conn = put(conn, Routes.intangible_fixed_asset_path(conn, :update, intangible_fixed_asset), intangible_fixed_asset: @update_attrs)
+    test "renders intangible_fixed_asset when data is valid", %{
+      conn: conn,
+      intangible_fixed_asset: %IntangibleFixedAsset{id: id} = intangible_fixed_asset
+    } do
+      conn =
+        put(conn, Routes.intangible_fixed_asset_path(conn, :update, intangible_fixed_asset),
+          intangible_fixed_asset: @update_attrs
+        )
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.intangible_fixed_asset_path(conn, :show, id))
@@ -66,8 +81,15 @@ defmodule MvpApiWeb.IntangibleFixedAssetControllerTest do
              } = json_response(conn, 200)["data"]
     end
 
-    test "renders errors when data is invalid", %{conn: conn, intangible_fixed_asset: intangible_fixed_asset} do
-      conn = put(conn, Routes.intangible_fixed_asset_path(conn, :update, intangible_fixed_asset), intangible_fixed_asset: @invalid_attrs)
+    test "renders errors when data is invalid", %{
+      conn: conn,
+      intangible_fixed_asset: intangible_fixed_asset
+    } do
+      conn =
+        put(conn, Routes.intangible_fixed_asset_path(conn, :update, intangible_fixed_asset),
+          intangible_fixed_asset: @invalid_attrs
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -75,8 +97,13 @@ defmodule MvpApiWeb.IntangibleFixedAssetControllerTest do
   describe "delete intangible_fixed_asset" do
     setup [:create_intangible_fixed_asset]
 
-    test "deletes chosen intangible_fixed_asset", %{conn: conn, intangible_fixed_asset: intangible_fixed_asset} do
-      conn = delete(conn, Routes.intangible_fixed_asset_path(conn, :delete, intangible_fixed_asset))
+    test "deletes chosen intangible_fixed_asset", %{
+      conn: conn,
+      intangible_fixed_asset: intangible_fixed_asset
+    } do
+      conn =
+        delete(conn, Routes.intangible_fixed_asset_path(conn, :delete, intangible_fixed_asset))
+
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->

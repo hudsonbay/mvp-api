@@ -3,6 +3,7 @@ defmodule MvpApi.Processes.Process do
   import Ecto.Changeset
 
   alias MvpApi.Providers.Provider
+  alias MvpApi.Knowledge.IntangibleFixedAsset
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -12,6 +13,10 @@ defmodule MvpApi.Processes.Process do
 
     many_to_many :providers, Provider,
       join_through: MvpApi.Providers.ProcessProvider,
+      on_replace: :delete
+
+    many_to_many :intangible_fixed_assets, IntangibleFixedAsset,
+      join_through: MvpApi.Knowledge.IntangibleFixedAssetProcess,
       on_replace: :delete
 
     timestamps()

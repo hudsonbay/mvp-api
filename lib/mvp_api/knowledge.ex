@@ -194,7 +194,123 @@ defmodule MvpApi.Knowledge do
       %Ecto.Changeset{data: %IntangibleFixedAsset{}}
 
   """
-  def change_intangible_fixed_asset(%IntangibleFixedAsset{} = intangible_fixed_asset, attrs \\ %{}) do
+  def change_intangible_fixed_asset(
+        %IntangibleFixedAsset{} = intangible_fixed_asset,
+        attrs \\ %{}
+      ) do
     IntangibleFixedAsset.changeset(intangible_fixed_asset, attrs)
+  end
+
+  alias MvpApi.Knowledge.IntangibleFixedAssetProcess
+
+  @doc """
+  Returns the list of intangible_fixed_assets_processes.
+
+  ## Examples
+
+      iex> list_intangible_fixed_assets_processes()
+      [%IntangibleFixedAssetProcess{}, ...]
+
+  """
+  def list_intangible_fixed_assets_processes do
+    Repo.all(IntangibleFixedAssetProcess)
+  end
+
+  @doc """
+  Gets a single intangible_fixed_asset_process.
+
+  Raises `Ecto.NoResultsError` if the Intangible fixed asset process does not exist.
+
+  ## Examples
+
+      iex> get_intangible_fixed_asset_process!(123)
+      %IntangibleFixedAssetProcess{}
+
+      iex> get_intangible_fixed_asset_process!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_intangible_fixed_asset_process!(id), do: Repo.get!(IntangibleFixedAssetProcess, id)
+
+  @doc """
+  Obtains the intangible fixed assets of a process
+  """
+  def get_intangible_fixed_assets_of_process(process_id) do
+    IntangibleFixedAssetProcess
+    |> Repo.all(process_id: process_id)
+    |> Repo.preload([:intangible_fixed_asset])
+  end
+
+  @doc """
+  Creates a intangible_fixed_asset_process.
+
+  ## Examples
+
+      iex> create_intangible_fixed_asset_process(%{field: value})
+      {:ok, %IntangibleFixedAssetProcess{}}
+
+      iex> create_intangible_fixed_asset_process(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_intangible_fixed_asset_process(attrs \\ %{}) do
+    %IntangibleFixedAssetProcess{}
+    |> IntangibleFixedAssetProcess.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a intangible_fixed_asset_process.
+
+  ## Examples
+
+      iex> update_intangible_fixed_asset_process(intangible_fixed_asset_process, %{field: new_value})
+      {:ok, %IntangibleFixedAssetProcess{}}
+
+      iex> update_intangible_fixed_asset_process(intangible_fixed_asset_process, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_intangible_fixed_asset_process(
+        %IntangibleFixedAssetProcess{} = intangible_fixed_asset_process,
+        attrs
+      ) do
+    intangible_fixed_asset_process
+    |> IntangibleFixedAssetProcess.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a intangible_fixed_asset_process.
+
+  ## Examples
+
+      iex> delete_intangible_fixed_asset_process(intangible_fixed_asset_process)
+      {:ok, %IntangibleFixedAssetProcess{}}
+
+      iex> delete_intangible_fixed_asset_process(intangible_fixed_asset_process)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_intangible_fixed_asset_process(
+        %IntangibleFixedAssetProcess{} = intangible_fixed_asset_process
+      ) do
+    Repo.delete(intangible_fixed_asset_process)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking intangible_fixed_asset_process changes.
+
+  ## Examples
+
+      iex> change_intangible_fixed_asset_process(intangible_fixed_asset_process)
+      %Ecto.Changeset{data: %IntangibleFixedAssetProcess{}}
+
+  """
+  def change_intangible_fixed_asset_process(
+        %IntangibleFixedAssetProcess{} = intangible_fixed_asset_process,
+        attrs \\ %{}
+      ) do
+    IntangibleFixedAssetProcess.changeset(intangible_fixed_asset_process, attrs)
   end
 end
