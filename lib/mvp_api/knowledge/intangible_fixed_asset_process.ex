@@ -51,10 +51,10 @@ defmodule MvpApi.Knowledge.IntangibleFixedAssetProcess do
   end
 
   def calculate_annual_amortization(changeset) do
-    amount = get_change(changeset, :amount)
-    dedicated_percentage = get_change(changeset, :dedicated_percentage)
-    initial_value = get_change(changeset, :initial_value)
-    depreciation_rate = get_change(changeset, :depreciation_rate)
+    amount = fetch_field(changeset, :amount)
+    dedicated_percentage = fetch_field(changeset, :dedicated_percentage)
+    initial_value = fetch_field(changeset, :initial_value)
+    depreciation_rate = fetch_field(changeset, :depreciation_rate)
 
     result =
       initial_value

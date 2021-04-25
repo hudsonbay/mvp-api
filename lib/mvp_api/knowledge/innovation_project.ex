@@ -43,8 +43,8 @@ defmodule MvpApi.Knowledge.InnovationProject do
   end
 
   defp calculate_annual_cost(changeset) do
-    budget = get_change(changeset, :budget)
-    term = get_change(changeset, :term)
+    budget = fetch_field(changeset, :budget)
+    term = fetch_field(changeset, :term)
 
     with {:ok, cost} <- Money.div(budget, term) do
       put_change(changeset, :annual_cost, cost)
@@ -52,8 +52,8 @@ defmodule MvpApi.Knowledge.InnovationProject do
   end
 
   defp calculate_payback_time(changeset) do
-    expected_annual_effect = get_change(changeset, :expected_annual_effect) |> Money.to_decimal()
-    budget = get_change(changeset, :budget) |> Money.to_decimal()
+    expected_annual_effect = fetch_field(changeset, :expected_annual_effect) |> Money.to_decimal()
+    budget = fetch_field(changeset, :budget) |> Money.to_decimal()
 
     put_change(changeset, :payback_time, Decimal.div(budget, expected_annual_effect))
   end

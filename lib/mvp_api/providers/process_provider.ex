@@ -69,11 +69,11 @@ defmodule MvpApi.Providers.ProcessProvider do
   end
 
   defp calculate_anual_transportation_volume(changeset) do
-    tons_by_supplies = get_change(changeset, :tons_by_supplies)
-    number_supplies_year = get_change(changeset, :number_supplies_year)
+    tons_by_supplies = fetch_field(changeset, :tons_by_supplies)
+    number_supplies_year = fetch_field(changeset, :number_supplies_year)
 
     provider =
-      get_change(changeset, :provider_id)
+      fetch_field(changeset, :provider_id)
       |> Providers.get_provider!()
 
     changeset
