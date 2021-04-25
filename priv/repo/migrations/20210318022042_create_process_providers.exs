@@ -20,5 +20,6 @@ defmodule MvpApi.Repo.Migrations.CreateProcessProviders do
 
     create index(:process_providers, [:provider_id])
     create index(:process_providers, [:process_id])
+    create unique_index(:process_providers, [:process_id, :provider_id])
   end
 end

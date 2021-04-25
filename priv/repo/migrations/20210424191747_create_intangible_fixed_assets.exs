@@ -9,6 +9,5 @@ defmodule MvpApi.Repo.Migrations.CreateIntangibleFixedAssets do
 
       timestamps()
     end
-
   end
 end
