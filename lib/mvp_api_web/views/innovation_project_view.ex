@@ -5,7 +5,8 @@ defmodule MvpApiWeb.InnovationProjectView do
 
   def render("index.json", %{innovation_projects: innovation_projects}) do
     %{
-      total_expected_annual_effect: InnovationProject.total_expected_annual_effect(innovation_projects),
+      total_expected_annual_effect:
+        InnovationProject.total_expected_annual_effect(innovation_projects),
       total_annual_cost: InnovationProject.total_annual_cost(innovation_projects),
       total_budget: InnovationProject.total_budget(innovation_projects),
       total_payback_time: InnovationProject.total_payback_time(innovation_projects),

@@ -6,7 +6,7 @@ defmodule MvpApiWeb.IntangibleFixedAssetProcessView do
   def render("index.json", %{intangible_fixed_assets_processes: intangible_fixed_assets_processes}) do
     %{
       total_annual_amortization:
-      IntangibleFixedAsset.total_annual_amortization(intangible_fixed_assets_processes),
+        IntangibleFixedAsset.total_annual_amortization(intangible_fixed_assets_processes),
       data:
         render_many(
           intangible_fixed_assets_processes,
