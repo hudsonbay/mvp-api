@@ -57,7 +57,11 @@ defmodule MvpApiWeb.IntangibleFixedAssetProcessController do
   end
 
   def get_intangible_fixed_assets_of_process(conn, %{"process_id" => process_id}) do
-    intangible_fixed_assets_processes = Knowledge.get_intangible_fixed_assets_of_process(process_id)
-    render(conn, "index.json", intangible_fixed_assets_processes: intangible_fixed_assets_processes)
+    intangible_fixed_assets_processes =
+      Knowledge.get_intangible_fixed_assets_of_process(process_id)
+
+    render(conn, "index.json",
+      intangible_fixed_assets_processes: intangible_fixed_assets_processes
+    )
   end
 end

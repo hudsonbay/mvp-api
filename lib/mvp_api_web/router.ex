@@ -57,7 +57,10 @@ defmodule MvpApiWeb.Router do
 
     resources "/intangible_fixed_asset_processes", IntangibleFixedAssetProcessController,
       except: [:new, :edit]
-    get "/processes/:process_id/intangible_fixed_assets", IntangibleFixedAssetProcessController, :get_intangible_fixed_assets_of_process
+
+    get "/processes/:process_id/intangible_fixed_assets",
+        IntangibleFixedAssetProcessController,
+        :get_intangible_fixed_assets_of_process
   end
 
   # Enables LiveDashboard only for development
