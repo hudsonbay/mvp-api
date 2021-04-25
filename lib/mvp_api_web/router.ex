@@ -44,7 +44,9 @@ defmodule MvpApiWeb.Router do
 
     # admin endpoints
     resources "/admin/providers", ProviderController, except: [:new, :edit]
-    resources "/admin/intangible_fixed_assets", IntangibleFixedAssetController, except: [:new, :edit]
+
+    resources "/admin/intangible_fixed_assets", IntangibleFixedAssetController,
+      except: [:new, :edit]
 
     resources "/processes", ProcessController, except: [:new, :edit]
     get "/processes/:process_id/providers", ProviderController, :providers_of_process
@@ -52,6 +54,10 @@ defmodule MvpApiWeb.Router do
     resources "/provider_evaluations", ProviderEvaluationController, except: [:new, :edit]
     resources "/transportation_schemas", TransportationSchemaController, except: [:new, :edit]
     resources "/innovation_projects", InnovationProjectController, except: [:new, :edit]
+
+    resources "/intangible_fixed_asset_processes", IntangibleFixedAssetProcessController,
+      except: [:new, :edit]
+    get "/processes/:process_id/intangible_fixed_assets", IntangibleFixedAssetProcessController, :get_intangible_fixed_assets_of_process
   end
 
   # Enables LiveDashboard only for development
