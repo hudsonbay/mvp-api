@@ -52,7 +52,9 @@ defmodule MvpApi.Knowledge.InnovationProject do
   end
 
   defp calculate_payback_time(changeset) do
-    expected_annual_effect = fetch_field!(changeset, :expected_annual_effect) |> Money.to_decimal()
+    expected_annual_effect =
+      fetch_field!(changeset, :expected_annual_effect) |> Money.to_decimal()
+
     budget = fetch_field!(changeset, :budget) |> Money.to_decimal()
 
     put_change(changeset, :payback_time, Decimal.div(budget, expected_annual_effect))
