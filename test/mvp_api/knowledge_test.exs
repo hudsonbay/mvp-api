@@ -3,50 +3,50 @@ defmodule MvpApi.KnowledgeTest do
 
   alias MvpApi.Knowledge
 
-  describe "innovation_projects" do
-    alias MvpApi.Knowledge.InnovationProject
+  # describe "innovation_projects" do
+  #   alias MvpApi.Knowledge.InnovationProject
 
-    @valid_attrs %{
-      budget: Money.new(:CUP, 120.5),
-      expected_annual_effect: Money.new(:CUP, 120.5),
-      expected_result: "some expected_result",
-      name: "some name",
-      objective: "some objective",
-      observation: "some observation",
-      term: 120.5
-    }
-    @update_attrs %{
-      budget: Money.new(:CUP, 456.7),
-      expected_annual_effect: Money.new("CUP", 456.7),
-      expected_result: "some updated expected_result",
-      name: "some updated name",
-      objective: "some updated objective",
-      observation: "some updated observation",
-      term: 456.7
-    }
-    @invalid_attrs %{
-      budget: nil,
-      expected_annual_effect: nil,
-      expected_result: nil,
-      name: nil,
-      objective: nil,
-      observation: nil,
-      term: nil
-    }
+  #   @valid_attrs %{
+  #     budget: Money.new(:CUP, 120.5),
+  #     expected_annual_effect: Money.new(:CUP, 120.5),
+  #     expected_result: "some expected_result",
+  #     name: "some name",
+  #     objective: "some objective",
+  #     observation: "some observation",
+  #     term: 120.5
+  #   }
+  #   @update_attrs %{
+  #     budget: Money.new(:CUP, 456.7),
+  #     expected_annual_effect: Money.new("CUP", 456.7),
+  #     expected_result: "some updated expected_result",
+  #     name: "some updated name",
+  #     objective: "some updated objective",
+  #     observation: "some updated observation",
+  #     term: 456.7
+  #   }
+  #   @invalid_attrs %{
+  #     budget: nil,
+  #     expected_annual_effect: nil,
+  #     expected_result: nil,
+  #     name: nil,
+  #     objective: nil,
+  #     observation: nil,
+  #     term: nil
+  #   }
 
-    def innovation_project_fixture(attrs \\ %{}) do
-      {:ok, innovation_project} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Knowledge.create_innovation_project()
+  #   def innovation_project_fixture(attrs \\ %{}) do
+  #     {:ok, innovation_project} =
+  #       attrs
+  #       |> Enum.into(@valid_attrs)
+  #       |> Knowledge.create_innovation_project()
 
-      innovation_project
-    end
+  #     innovation_project
+  #   end
 
-    test "list_innovation_projects/0 returns all innovation_projects" do
-      innovation_project = innovation_project_fixture()
-      assert Knowledge.list_innovation_projects() == [innovation_project]
-    end
+  #   test "list_innovation_projects/0 returns all innovation_projects" do
+  #     innovation_project = innovation_project_fixture()
+  #     assert Knowledge.list_innovation_projects() == [innovation_project]
+  #   end
 
     # test "get_innovation_project!/1 returns the innovation_project with given id" do
     #   innovation_project = innovation_project_fixture()
@@ -107,7 +107,7 @@ defmodule MvpApi.KnowledgeTest do
     #   innovation_project = innovation_project_fixture()
     #   assert %Ecto.Changeset{} = Knowledge.change_innovation_project(innovation_project)
     # end
-  end
+  # end
 
   describe "intangible_fixed_assets" do
     alias MvpApi.Knowledge.IntangibleFixedAsset
