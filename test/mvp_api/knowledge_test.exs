@@ -48,65 +48,65 @@ defmodule MvpApi.KnowledgeTest do
   #     assert Knowledge.list_innovation_projects() == [innovation_project]
   #   end
 
-    # test "get_innovation_project!/1 returns the innovation_project with given id" do
-    #   innovation_project = innovation_project_fixture()
-    #   assert Knowledge.get_innovation_project!(innovation_project.id) == innovation_project
-    # end
+  # test "get_innovation_project!/1 returns the innovation_project with given id" do
+  #   innovation_project = innovation_project_fixture()
+  #   assert Knowledge.get_innovation_project!(innovation_project.id) == innovation_project
+  # end
 
-    # test "create_innovation_project/1 with valid data creates a innovation_project" do
-    #   assert {:ok, %InnovationProject{} = innovation_project} =
-    #            Knowledge.create_innovation_project(@valid_attrs)
+  # test "create_innovation_project/1 with valid data creates a innovation_project" do
+  #   assert {:ok, %InnovationProject{} = innovation_project} =
+  #            Knowledge.create_innovation_project(@valid_attrs)
 
-    #   assert innovation_project.budget == Money.new(:CUP, 120.5)
-    #   assert innovation_project.expected_annual_effect == Money.new(:CUP, 120.5)
-    #   assert innovation_project.expected_result == "some expected_result"
-    #   assert innovation_project.name == "some name"
-    #   assert innovation_project.objective == "some objective"
-    #   assert innovation_project.observation == "some observation"
-    #   assert innovation_project.term == Decimal.new(120.5)
-    # end
+  #   assert innovation_project.budget == Money.new(:CUP, 120.5)
+  #   assert innovation_project.expected_annual_effect == Money.new(:CUP, 120.5)
+  #   assert innovation_project.expected_result == "some expected_result"
+  #   assert innovation_project.name == "some name"
+  #   assert innovation_project.objective == "some objective"
+  #   assert innovation_project.observation == "some observation"
+  #   assert innovation_project.term == Decimal.new(120.5)
+  # end
 
-    # test "create_innovation_project/1 with invalid data returns error changeset" do
-    #   assert {:error, %Ecto.Changeset{}} = Knowledge.create_innovation_project(@invalid_attrs)
-    # end
+  # test "create_innovation_project/1 with invalid data returns error changeset" do
+  #   assert {:error, %Ecto.Changeset{}} = Knowledge.create_innovation_project(@invalid_attrs)
+  # end
 
-    # test "update_innovation_project/2 with valid data updates the innovation_project" do
-    #   innovation_project = innovation_project_fixture()
+  # test "update_innovation_project/2 with valid data updates the innovation_project" do
+  #   innovation_project = innovation_project_fixture()
 
-    #   assert {:ok, %InnovationProject{} = innovation_project} =
-    #            Knowledge.update_innovation_project(innovation_project, @update_attrs)
+  #   assert {:ok, %InnovationProject{} = innovation_project} =
+  #            Knowledge.update_innovation_project(innovation_project, @update_attrs)
 
-    #   assert innovation_project.budget == Money.new(:CUP, 456.7)
-    #   assert innovation_project.expected_annual_effect == Money.new(:CUP, 456.7)
-    #   assert innovation_project.expected_result == "some updated expected_result"
-    #   assert innovation_project.name == "some updated name"
-    #   assert innovation_project.objective == "some updated objective"
-    #   assert innovation_project.observation == "some updated observation"
-    #   assert innovation_project.term == Decimal.new(456.7)
-    # end
+  #   assert innovation_project.budget == Money.new(:CUP, 456.7)
+  #   assert innovation_project.expected_annual_effect == Money.new(:CUP, 456.7)
+  #   assert innovation_project.expected_result == "some updated expected_result"
+  #   assert innovation_project.name == "some updated name"
+  #   assert innovation_project.objective == "some updated objective"
+  #   assert innovation_project.observation == "some updated observation"
+  #   assert innovation_project.term == Decimal.new(456.7)
+  # end
 
-    # test "update_innovation_project/2 with invalid data returns error changeset" do
-    #   innovation_project = innovation_project_fixture()
+  # test "update_innovation_project/2 with invalid data returns error changeset" do
+  #   innovation_project = innovation_project_fixture()
 
-    #   assert {:error, %Ecto.Changeset{}} =
-    #            Knowledge.update_innovation_project(innovation_project, @invalid_attrs)
+  #   assert {:error, %Ecto.Changeset{}} =
+  #            Knowledge.update_innovation_project(innovation_project, @invalid_attrs)
 
-    #   assert innovation_project == Knowledge.get_innovation_project!(innovation_project.id)
-    # end
+  #   assert innovation_project == Knowledge.get_innovation_project!(innovation_project.id)
+  # end
 
-    # test "delete_innovation_project/1 deletes the innovation_project" do
-    #   innovation_project = innovation_project_fixture()
-    #   assert {:ok, %InnovationProject{}} = Knowledge.delete_innovation_project(innovation_project)
+  # test "delete_innovation_project/1 deletes the innovation_project" do
+  #   innovation_project = innovation_project_fixture()
+  #   assert {:ok, %InnovationProject{}} = Knowledge.delete_innovation_project(innovation_project)
 
-    #   assert_raise Ecto.NoResultsError, fn ->
-    #     Knowledge.get_innovation_project!(innovation_project.id)
-    #   end
-    # end
+  #   assert_raise Ecto.NoResultsError, fn ->
+  #     Knowledge.get_innovation_project!(innovation_project.id)
+  #   end
+  # end
 
-    # test "change_innovation_project/1 returns a innovation_project changeset" do
-    #   innovation_project = innovation_project_fixture()
-    #   assert %Ecto.Changeset{} = Knowledge.change_innovation_project(innovation_project)
-    # end
+  # test "change_innovation_project/1 returns a innovation_project changeset" do
+  #   innovation_project = innovation_project_fixture()
+  #   assert %Ecto.Changeset{} = Knowledge.change_innovation_project(innovation_project)
+  # end
   # end
 
   describe "intangible_fixed_assets" do

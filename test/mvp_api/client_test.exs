@@ -78,50 +78,50 @@ defmodule MvpApi.ClientTest do
   #     factor
   #   end
 
-  #   test "list_factors/0 returns all factors" do
-  #     factor = factor_fixture()
-  #     assert Client.list_factors() == [factor]
-  #   end
+  # test "list_factors/0 returns all factors" do
+  #   factor = factor_fixture()
+  #   assert Client.list_factors() == [factor]
+  # end
 
-  #   test "get_factor!/1 returns the factor with given id" do
-  #     factor = factor_fixture()
-  #     assert Client.get_factor!(factor.id) == factor
-  #   end
+  # test "get_factor!/1 returns the factor with given id" do
+  #   factor = factor_fixture()
+  #   assert Client.get_factor!(factor.id) == factor
+  # end
 
-  #   test "create_factor/1 with valid data creates a factor" do
-  #     assert {:ok, %Factor{} = factor} = Client.create_factor(@valid_attrs)
-  #     assert factor.name == "Humedad"
-  #     assert factor.value == Decimal.new("120.5")
-  #     assert factor.weighing == Decimal.new("120.5")
-  #   end
+  # test "create_factor/1 with valid data creates a factor" do
+  #   assert {:ok, %Factor{} = factor} = Client.create_factor(@valid_attrs)
+  #   assert factor.name == "Humedad"
+  #   assert factor.value == Decimal.new("120.5")
+  #   assert factor.weighing == Decimal.new("120.5")
+  # end
 
-  #   test "create_factor/1 with invalid data returns error changeset" do
-  #     assert {:error, %Ecto.Changeset{}} = Client.create_factor(@invalid_attrs)
-  #   end
+  # test "create_factor/1 with invalid data returns error changeset" do
+  #   assert {:error, %Ecto.Changeset{}} = Client.create_factor(@invalid_attrs)
+  # end
 
-  #   test "update_factor/2 with valid data updates the factor" do
-  #     factor = factor_fixture()
-  #     assert {:ok, %Factor{} = factor} = Client.update_factor(factor, @update_attrs)
-  #     assert factor.name == "Dureza"
-  #     assert factor.value == Decimal.new("456.7")
-  #     assert factor.weighing == Decimal.new("456.7")
-  #   end
+  # test "update_factor/2 with valid data updates the factor" do
+  #   factor = factor_fixture()
+  #   assert {:ok, %Factor{} = factor} = Client.update_factor(factor, @update_attrs)
+  #   assert factor.name == "Dureza"
+  #   assert factor.value == Decimal.new("456.7")
+  #   assert factor.weighing == Decimal.new("456.7")
+  # end
 
-  #   test "update_factor/2 with invalid data returns error changeset" do
-  #     factor = factor_fixture()
-  #     assert {:error, %Ecto.Changeset{}} = Client.update_factor(factor, @invalid_attrs)
-  #     assert factor == Client.get_factor!(factor.id)
-  #   end
+  # test "update_factor/2 with invalid data returns error changeset" do
+  #   factor = factor_fixture()
+  #   assert {:error, %Ecto.Changeset{}} = Client.update_factor(factor, @invalid_attrs)
+  #   assert factor == Client.get_factor!(factor.id)
+  # end
 
-  #   test "delete_factor/1 deletes the factor" do
-  #     factor = factor_fixture()
-  #     assert {:ok, %Factor{}} = Client.delete_factor(factor)
-  #     assert_raise Ecto.NoResultsError, fn -> Client.get_factor!(factor.id) end
-  #   end
+  # test "delete_factor/1 deletes the factor" do
+  #   factor = factor_fixture()
+  #   assert {:ok, %Factor{}} = Client.delete_factor(factor)
+  #   assert_raise Ecto.NoResultsError, fn -> Client.get_factor!(factor.id) end
+  # end
 
-  #   test "change_factor/1 returns a factor changeset" do
-  #     factor = factor_fixture()
-  #     assert %Ecto.Changeset{} = Client.change_factor(factor)
-  #   end
+  # test "change_factor/1 returns a factor changeset" do
+  #   factor = factor_fixture()
+  #   assert %Ecto.Changeset{} = Client.change_factor(factor)
+  # end
   # end
 end
