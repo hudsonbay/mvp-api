@@ -19,6 +19,13 @@ alias MvpApi.Processes.Process
 alias MvpApi.Providers.{ProcessProvider, ProviderEvaluation, TransportationSchema}
 alias MvpApi.Knowledge
 alias MvpApi.Knowledge.{IntangibleFixedAsset}
+alias MvpApi.Entities.Country
+
+# Countries
+with {:ok, body} <- "priv/repo/seeds/countries.json" |> Path.expand() |> File.read() do
+  Poison.decode!(body, as: [%Country{}])
+  |> Enum.each(fn x -> Repo.insert!(x) end)
+end
 
 # Products with factors
 for _ <- 0..10 do
