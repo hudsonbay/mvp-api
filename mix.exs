@@ -55,7 +55,7 @@ defmodule MvpApi.MixProject do
       {:numbers, "~> 5.2"},
       {:corsica, "~> 1.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:faker, "~> 0.16", only: [:dev]},
+      {:faker, "~> 0.16"},
       {:ex_money, "~> 5.5.1"},
       {:ex_money_sql, "~> 1.4.4"},
       {:poison, "~> 3.1"}
