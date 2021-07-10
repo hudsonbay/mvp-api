@@ -33,5 +33,4 @@ defmodule MvpApi.Utils.BulkOperations do
         }
     end
   end
-
 end

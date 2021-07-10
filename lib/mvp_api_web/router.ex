@@ -48,6 +48,9 @@ defmodule MvpApiWeb.Router do
     resources "/admin/intangible_fixed_assets", IntangibleFixedAssetController,
       except: [:new, :edit]
 
+    resources "/admin/tangible_fixed_assets", TangibleFixedAssetController,
+      except: [:new, :edit]
+
     resources "/processes", ProcessController, except: [:new, :edit]
     get "/processes/:process_id/providers", ProviderController, :providers_of_process
     post "/processes/add_provider", ProviderController, :add_provider_to_process
