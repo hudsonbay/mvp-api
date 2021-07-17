@@ -191,4 +191,89 @@ defmodule MvpApi.InfrastructureTest do
       assert %Ecto.Changeset{} = Infrastructure.change_util_tool(util_tool)
     end
   end
+
+  describe "control_points" do
+    alias MvpApi.Infrastructure.Metrology.ControlPoint
+
+    @valid_attrs %{annual_cost_verification: "120.5", annual_total_expense: "120.5", dedicated_percentage: "120.5", executor: "some executor", instrument: "some instrument", name: "some name", precision: "some precision", price_per_unit: "120.5", price_per_verification: "120.5", quantity: "some quantity", total_amount: "120.5", useful_life_years: 42, variable_to_control: "some variable_to_control", verification_frequency_months: 42}
+    @update_attrs %{annual_cost_verification: "456.7", annual_total_expense: "456.7", dedicated_percentage: "456.7", executor: "some updated executor", instrument: "some updated instrument", name: "some updated name", precision: "some updated precision", price_per_unit: "456.7", price_per_verification: "456.7", quantity: "some updated quantity", total_amount: "456.7", useful_life_years: 43, variable_to_control: "some updated variable_to_control", verification_frequency_months: 43}
+    @invalid_attrs %{annual_cost_verification: nil, annual_total_expense: nil, dedicated_percentage: nil, executor: nil, instrument: nil, name: nil, precision: nil, price_per_unit: nil, price_per_verification: nil, quantity: nil, total_amount: nil, useful_life_years: nil, variable_to_control: nil, verification_frequency_months: nil}
+
+    def control_point_fixture(attrs \\ %{}) do
+      {:ok, control_point} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Infrastructure.create_control_point()
+
+      control_point
+    end
+
+    test "list_control_points/0 returns all control_points" do
+      control_point = control_point_fixture()
+      assert Infrastructure.list_control_points() == [control_point]
+    end
+
+    test "get_control_point!/1 returns the control_point with given id" do
+      control_point = control_point_fixture()
+      assert Infrastructure.get_control_point!(control_point.id) == control_point
+    end
+
+    test "create_control_point/1 with valid data creates a control_point" do
+      assert {:ok, %ControlPoint{} = control_point} = Infrastructure.create_control_point(@valid_attrs)
+      assert control_point.annual_cost_verification == Decimal.new("120.5")
+      assert control_point.annual_total_expense == Decimal.new("120.5")
+      assert control_point.dedicated_percentage == Decimal.new("120.5")
+      assert control_point.executor == "some executor"
+      assert control_point.instrument == "some instrument"
+      assert control_point.name == "some name"
+      assert control_point.precision == "some precision"
+      assert control_point.price_per_unit == Decimal.new("120.5")
+      assert control_point.price_per_verification == Decimal.new("120.5")
+      assert control_point.quantity == "some quantity"
+      assert control_point.total_amount == Decimal.new("120.5")
+      assert control_point.useful_life_years == 42
+      assert control_point.variable_to_control == "some variable_to_control"
+      assert control_point.verification_frequency_months == 42
+    end
+
+    test "create_control_point/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Infrastructure.create_control_point(@invalid_attrs)
+    end
+
+    test "update_control_point/2 with valid data updates the control_point" do
+      control_point = control_point_fixture()
+      assert {:ok, %ControlPoint{} = control_point} = Infrastructure.update_control_point(control_point, @update_attrs)
+      assert control_point.annual_cost_verification == Decimal.new("456.7")
+      assert control_point.annual_total_expense == Decimal.new("456.7")
+      assert control_point.dedicated_percentage == Decimal.new("456.7")
+      assert control_point.executor == "some updated executor"
+      assert control_point.instrument == "some updated instrument"
+      assert control_point.name == "some updated name"
+      assert control_point.precision == "some updated precision"
+      assert control_point.price_per_unit == Decimal.new("456.7")
+      assert control_point.price_per_verification == Decimal.new("456.7")
+      assert control_point.quantity == "some updated quantity"
+      assert control_point.total_amount == Decimal.new("456.7")
+      assert control_point.useful_life_years == 43
+      assert control_point.variable_to_control == "some updated variable_to_control"
+      assert control_point.verification_frequency_months == 43
+    end
+
+    test "update_control_point/2 with invalid data returns error changeset" do
+      control_point = control_point_fixture()
+      assert {:error, %Ecto.Changeset{}} = Infrastructure.update_control_point(control_point, @invalid_attrs)
+      assert control_point == Infrastructure.get_control_point!(control_point.id)
+    end
+
+    test "delete_control_point/1 deletes the control_point" do
+      control_point = control_point_fixture()
+      assert {:ok, %ControlPoint{}} = Infrastructure.delete_control_point(control_point)
+      assert_raise Ecto.NoResultsError, fn -> Infrastructure.get_control_point!(control_point.id) end
+    end
+
+    test "change_control_point/1 returns a control_point changeset" do
+      control_point = control_point_fixture()
+      assert %Ecto.Changeset{} = Infrastructure.change_control_point(control_point)
+    end
+  end
 end

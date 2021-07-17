@@ -13,13 +13,13 @@ defmodule MvpApi.Infrastructure.UtilTool do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "utils_tools" do
-    field :annual_cost, Money.Ecto.Composite.Type
-    field :annual_wear_percentage, :decimal
-    field :dedication_percentage, :decimal
-    field :description, :string
-    field :price_per_unit, Money.Ecto.Composite.Type
-    field :quantity, :integer
-    field :total_amount, Money.Ecto.Composite.Type
+    field :annual_cost, Money.Ecto.Composite.Type, null: false
+    field :annual_wear_percentage, :decimal, null: false
+    field :dedication_percentage, :decimal, null: false
+    field :description, :string, null: false
+    field :price_per_unit, Money.Ecto.Composite.Type, null: false
+    field :quantity, :integer, null: false
+    field :total_amount, Money.Ecto.Composite.Type, null: false
 
     timestamps()
   end

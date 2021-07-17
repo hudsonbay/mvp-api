@@ -197,4 +197,100 @@ defmodule MvpApi.Infrastructure do
   def change_util_tool(%UtilTool{} = util_tool, attrs \\ %{}) do
     UtilTool.changeset(util_tool, attrs)
   end
+
+  alias MvpApi.Infrastructure.Metrology.ControlPoint
+
+  @doc """
+  Returns the list of control_points.
+
+  ## Examples
+
+      iex> list_control_points()
+      [%ControlPoint{}, ...]
+
+  """
+  def list_control_points do
+    Repo.all(ControlPoint)
+  end
+
+  @doc """
+  Gets a single control_point.
+
+  Raises `Ecto.NoResultsError` if the Control point does not exist.
+
+  ## Examples
+
+      iex> get_control_point!(123)
+      %ControlPoint{}
+
+      iex> get_control_point!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_control_point!(id), do: Repo.get!(ControlPoint, id)
+
+  @doc """
+  Creates a control_point.
+
+  ## Examples
+
+      iex> create_control_point(%{field: value})
+      {:ok, %ControlPoint{}}
+
+      iex> create_control_point(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_control_point(attrs \\ %{}) do
+    %ControlPoint{}
+    |> ControlPoint.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a control_point.
+
+  ## Examples
+
+      iex> update_control_point(control_point, %{field: new_value})
+      {:ok, %ControlPoint{}}
+
+      iex> update_control_point(control_point, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_control_point(%ControlPoint{} = control_point, attrs) do
+    control_point
+    |> ControlPoint.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a control_point.
+
+  ## Examples
+
+      iex> delete_control_point(control_point)
+      {:ok, %ControlPoint{}}
+
+      iex> delete_control_point(control_point)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_control_point(%ControlPoint{} = control_point) do
+    Repo.delete(control_point)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking control_point changes.
+
+  ## Examples
+
+      iex> change_control_point(control_point)
+      %Ecto.Changeset{data: %ControlPoint{}}
+
+  """
+  def change_control_point(%ControlPoint{} = control_point, attrs \\ %{}) do
+    ControlPoint.changeset(control_point, attrs)
+  end
 end
