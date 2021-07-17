@@ -276,4 +276,77 @@ defmodule MvpApi.InfrastructureTest do
       assert %Ecto.Changeset{} = Infrastructure.change_control_point(control_point)
     end
   end
+
+  describe "protection_actions" do
+    alias MvpApi.Infrastructure.Protection.Action
+
+    @valid_attrs %{annual_cost: "120.5", monthly_payment: "120.5", name: "some name", observations: "some observations", price_per_unit: "some price_per_unit", quantity: 42, resource: "some resource", useful_life_months: 42}
+    @update_attrs %{annual_cost: "456.7", monthly_payment: "456.7", name: "some updated name", observations: "some updated observations", price_per_unit: "some updated price_per_unit", quantity: 43, resource: "some updated resource", useful_life_months: 43}
+    @invalid_attrs %{annual_cost: nil, monthly_payment: nil, name: nil, observations: nil, price_per_unit: nil, quantity: nil, resource: nil, useful_life_months: nil}
+
+    def action_fixture(attrs \\ %{}) do
+      {:ok, action} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Infrastructure.create_action()
+
+      action
+    end
+
+    test "list_protection_actions/0 returns all protection_actions" do
+      action = action_fixture()
+      assert Infrastructure.list_protection_actions() == [action]
+    end
+
+    test "get_action!/1 returns the action with given id" do
+      action = action_fixture()
+      assert Infrastructure.get_action!(action.id) == action
+    end
+
+    test "create_action/1 with valid data creates a action" do
+      assert {:ok, %Action{} = action} = Infrastructure.create_action(@valid_attrs)
+      assert action.annual_cost == Decimal.new("120.5")
+      assert action.monthly_payment == Decimal.new("120.5")
+      assert action.name == "some name"
+      assert action.observations == "some observations"
+      assert action.price_per_unit == "some price_per_unit"
+      assert action.quantity == 42
+      assert action.resource == "some resource"
+      assert action.useful_life_months == 42
+    end
+
+    test "create_action/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Infrastructure.create_action(@invalid_attrs)
+    end
+
+    test "update_action/2 with valid data updates the action" do
+      action = action_fixture()
+      assert {:ok, %Action{} = action} = Infrastructure.update_action(action, @update_attrs)
+      assert action.annual_cost == Decimal.new("456.7")
+      assert action.monthly_payment == Decimal.new("456.7")
+      assert action.name == "some updated name"
+      assert action.observations == "some updated observations"
+      assert action.price_per_unit == "some updated price_per_unit"
+      assert action.quantity == 43
+      assert action.resource == "some updated resource"
+      assert action.useful_life_months == 43
+    end
+
+    test "update_action/2 with invalid data returns error changeset" do
+      action = action_fixture()
+      assert {:error, %Ecto.Changeset{}} = Infrastructure.update_action(action, @invalid_attrs)
+      assert action == Infrastructure.get_action!(action.id)
+    end
+
+    test "delete_action/1 deletes the action" do
+      action = action_fixture()
+      assert {:ok, %Action{}} = Infrastructure.delete_action(action)
+      assert_raise Ecto.NoResultsError, fn -> Infrastructure.get_action!(action.id) end
+    end
+
+    test "change_action/1 returns a action changeset" do
+      action = action_fixture()
+      assert %Ecto.Changeset{} = Infrastructure.change_action(action)
+    end
+  end
 end
