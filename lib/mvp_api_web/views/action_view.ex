@@ -11,7 +11,8 @@ defmodule MvpApiWeb.ActionView do
   end
 
   def render("action.json", %{action: action}) do
-    %{id: action.id,
+    %{
+      id: action.id,
       name: action.name,
       resource: action.resource,
       quantity: action.quantity,
@@ -19,6 +20,7 @@ defmodule MvpApiWeb.ActionView do
       useful_life_months: action.useful_life_months,
       monthly_payment: action.monthly_payment,
       annual_cost: action.annual_cost,
-      observations: action.observations}
+      observations: action.observations
+    }
   end
 end

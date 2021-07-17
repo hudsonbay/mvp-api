@@ -36,7 +36,22 @@ defmodule MvpApiWeb.ControlPointControllerTest do
     variable_to_control: "some updated variable_to_control",
     verification_frequency_months: 43
   }
-  @invalid_attrs %{annual_cost_verification: nil, annual_total_expense: nil, dedicated_percentage: nil, executor: nil, instrument: nil, name: nil, precision: nil, price_per_unit: nil, price_per_verification: nil, quantity: nil, total_amount: nil, useful_life_years: nil, variable_to_control: nil, verification_frequency_months: nil}
+  @invalid_attrs %{
+    annual_cost_verification: nil,
+    annual_total_expense: nil,
+    dedicated_percentage: nil,
+    executor: nil,
+    instrument: nil,
+    name: nil,
+    precision: nil,
+    price_per_unit: nil,
+    price_per_verification: nil,
+    quantity: nil,
+    total_amount: nil,
+    useful_life_years: nil,
+    variable_to_control: nil,
+    verification_frequency_months: nil
+  }
 
   def fixture(:control_point) do
     {:ok, control_point} = Infrastructure.create_control_point(@create_attrs)
@@ -89,8 +104,15 @@ defmodule MvpApiWeb.ControlPointControllerTest do
   describe "update control_point" do
     setup [:create_control_point]
 
-    test "renders control_point when data is valid", %{conn: conn, control_point: %ControlPoint{id: id} = control_point} do
-      conn = put(conn, Routes.control_point_path(conn, :update, control_point), control_point: @update_attrs)
+    test "renders control_point when data is valid", %{
+      conn: conn,
+      control_point: %ControlPoint{id: id} = control_point
+    } do
+      conn =
+        put(conn, Routes.control_point_path(conn, :update, control_point),
+          control_point: @update_attrs
+        )
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.control_point_path(conn, :show, id))
@@ -115,7 +137,11 @@ defmodule MvpApiWeb.ControlPointControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, control_point: control_point} do
-      conn = put(conn, Routes.control_point_path(conn, :update, control_point), control_point: @invalid_attrs)
+      conn =
+        put(conn, Routes.control_point_path(conn, :update, control_point),
+          control_point: @invalid_attrs
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

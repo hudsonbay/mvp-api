@@ -24,7 +24,16 @@ defmodule MvpApiWeb.ActionControllerTest do
     resource: "some updated resource",
     useful_life_months: 43
   }
-  @invalid_attrs %{annual_cost: nil, monthly_payment: nil, name: nil, observations: nil, price_per_unit: nil, quantity: nil, resource: nil, useful_life_months: nil}
+  @invalid_attrs %{
+    annual_cost: nil,
+    monthly_payment: nil,
+    name: nil,
+    observations: nil,
+    price_per_unit: nil,
+    quantity: nil,
+    resource: nil,
+    useful_life_months: nil
+  }
 
   def fixture(:action) do
     {:ok, action} = Infrastructure.create_action(@create_attrs)

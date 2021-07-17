@@ -21,6 +21,5 @@ defmodule MvpApi.Repo.Migrations.CreateControlPoints do
 
       timestamps()
     end
-
   end
 end

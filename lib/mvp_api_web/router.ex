@@ -48,8 +48,7 @@ defmodule MvpApiWeb.Router do
     resources "/admin/intangible_fixed_assets", IntangibleFixedAssetController,
       except: [:new, :edit]
 
-    resources "/admin/tangible_fixed_assets", TangibleFixedAssetController,
-      except: [:new, :edit]
+    resources "/admin/tangible_fixed_assets", TangibleFixedAssetController, except: [:new, :edit]
 
     resources "/processes", ProcessController, except: [:new, :edit]
     get "/processes/:process_id/providers", ProviderController, :providers_of_process
@@ -58,8 +57,12 @@ defmodule MvpApiWeb.Router do
     resources "/transportation_schemas", TransportationSchemaController, except: [:new, :edit]
     resources "/innovation_projects", InnovationProjectController, except: [:new, :edit]
     resources "/infrastructure/utils_tools", UtilToolController, except: [:new, :edit]
-    resources "/infrastructure/metrology/control_points", ControlPointController, except: [:new, :edit]
+
+    resources "/infrastructure/metrology/control_points", ControlPointController,
+      except: [:new, :edit]
+
     resources "/infrastructure/protection_actions", ActionController, except: [:new, :edit]
+
     resources "/intangible_fixed_asset_processes", IntangibleFixedAssetProcessController,
       except: [:new, :edit]
 

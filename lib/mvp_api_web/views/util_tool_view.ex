@@ -11,13 +11,15 @@ defmodule MvpApiWeb.UtilToolView do
   end
 
   def render("util_tool.json", %{util_tool: util_tool}) do
-    %{id: util_tool.id,
+    %{
+      id: util_tool.id,
       description: util_tool.description,
       quantity: util_tool.quantity,
       price_per_unit: util_tool.price_per_unit,
       total_amount: util_tool.total_amount,
       dedication_percentage: util_tool.dedication_percentage,
       annual_wear_percentage: util_tool.annual_wear_percentage,
-      annual_cost: util_tool.annual_cost}
+      annual_cost: util_tool.annual_cost
+    }
   end
 end

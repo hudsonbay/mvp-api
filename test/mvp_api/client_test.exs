@@ -4,62 +4,62 @@ defmodule MvpApi.ClientTest do
   # alias MvpApi.Client
 
   # describe "products" do
-    # alias MvpApi.Client.Product
+  # alias MvpApi.Client.Product
 
-    # @valid_attrs %{name: "some name"}
-    # @update_attrs %{name: "some updated name"}
-    # @invalid_attrs %{name: nil}
+  # @valid_attrs %{name: "some name"}
+  # @update_attrs %{name: "some updated name"}
+  # @invalid_attrs %{name: nil}
 
-    # def product_fixture(attrs \\ %{}) do
-    #   {:ok, product} =
-    #     attrs
-    #     |> Enum.into(@valid_attrs)
-    #     |> Client.create_product()
+  # def product_fixture(attrs \\ %{}) do
+  #   {:ok, product} =
+  #     attrs
+  #     |> Enum.into(@valid_attrs)
+  #     |> Client.create_product()
 
-    #   product
-    # end
+  #   product
+  # end
 
-    # test "list_products/0 returns all products" do
-    #   product = product_fixture()
-    #   assert Client.list_products() == [product]
-    # end
+  # test "list_products/0 returns all products" do
+  #   product = product_fixture()
+  #   assert Client.list_products() == [product]
+  # end
 
-    # test "get_product!/1 returns the product with given id" do
-    #   product = product_fixture()
-    #   assert Client.get_product!(product.id) == product
-    # end
+  # test "get_product!/1 returns the product with given id" do
+  #   product = product_fixture()
+  #   assert Client.get_product!(product.id) == product
+  # end
 
-    # test "create_product/1 with valid data creates a product" do
-    #   assert {:ok, %Product{} = product} = Client.create_product(@valid_attrs)
-    #   assert product.name == "some name"
-    # end
+  # test "create_product/1 with valid data creates a product" do
+  #   assert {:ok, %Product{} = product} = Client.create_product(@valid_attrs)
+  #   assert product.name == "some name"
+  # end
 
-    # test "create_product/1 with invalid data returns error changeset" do
-    #   assert {:error, %Ecto.Changeset{}} = Client.create_product(@invalid_attrs)
-    # end
+  # test "create_product/1 with invalid data returns error changeset" do
+  #   assert {:error, %Ecto.Changeset{}} = Client.create_product(@invalid_attrs)
+  # end
 
-    # test "update_product/2 with valid data updates the product" do
-    #   product = product_fixture()
-    #   assert {:ok, %Product{} = product} = Client.update_product(product, @update_attrs)
-    #   assert product.name == "some updated name"
-    # end
+  # test "update_product/2 with valid data updates the product" do
+  #   product = product_fixture()
+  #   assert {:ok, %Product{} = product} = Client.update_product(product, @update_attrs)
+  #   assert product.name == "some updated name"
+  # end
 
-    # test "update_product/2 with invalid data returns error changeset" do
-    #   product = product_fixture()
-    #   assert {:error, %Ecto.Changeset{}} = Client.update_product(product, @invalid_attrs)
-    #   assert product == Client.get_product!(product.id)
-    # end
+  # test "update_product/2 with invalid data returns error changeset" do
+  #   product = product_fixture()
+  #   assert {:error, %Ecto.Changeset{}} = Client.update_product(product, @invalid_attrs)
+  #   assert product == Client.get_product!(product.id)
+  # end
 
-    # test "delete_product/1 deletes the product" do
-    #   product = product_fixture()
-    #   assert {:ok, %Product{}} = Client.delete_product(product)
-    #   assert_raise Ecto.NoResultsError, fn -> Client.get_product!(product.id) end
-    # end
+  # test "delete_product/1 deletes the product" do
+  #   product = product_fixture()
+  #   assert {:ok, %Product{}} = Client.delete_product(product)
+  #   assert_raise Ecto.NoResultsError, fn -> Client.get_product!(product.id) end
+  # end
 
-    # test "change_product/1 returns a product changeset" do
-    #   product = product_fixture()
-    #   assert %Ecto.Changeset{} = Client.change_product(product)
-    # end
+  # test "change_product/1 returns a product changeset" do
+  #   product = product_fixture()
+  #   assert %Ecto.Changeset{} = Client.change_product(product)
+  # end
   # end
 
   # describe "factors" do

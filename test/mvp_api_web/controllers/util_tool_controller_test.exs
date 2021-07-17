@@ -22,7 +22,15 @@ defmodule MvpApiWeb.UtilToolControllerTest do
     quantity: "some updated quantity",
     total_amount: "456.7"
   }
-  @invalid_attrs %{annual_cost: nil, annual_wear_percentage: nil, dedication_percentage: nil, description: nil, price_per_unit: nil, quantity: nil, total_amount: nil}
+  @invalid_attrs %{
+    annual_cost: nil,
+    annual_wear_percentage: nil,
+    dedication_percentage: nil,
+    description: nil,
+    price_per_unit: nil,
+    quantity: nil,
+    total_amount: nil
+  }
 
   def fixture(:util_tool) do
     {:ok, util_tool} = Infrastructure.create_util_tool(@create_attrs)
@@ -68,7 +76,10 @@ defmodule MvpApiWeb.UtilToolControllerTest do
   describe "update util_tool" do
     setup [:create_util_tool]
 
-    test "renders util_tool when data is valid", %{conn: conn, util_tool: %UtilTool{id: id} = util_tool} do
+    test "renders util_tool when data is valid", %{
+      conn: conn,
+      util_tool: %UtilTool{id: id} = util_tool
+    } do
       conn = put(conn, Routes.util_tool_path(conn, :update, util_tool), util_tool: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 

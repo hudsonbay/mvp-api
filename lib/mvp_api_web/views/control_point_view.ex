@@ -11,7 +11,8 @@ defmodule MvpApiWeb.ControlPointView do
   end
 
   def render("control_point.json", %{control_point: control_point}) do
-    %{id: control_point.id,
+    %{
+      id: control_point.id,
       name: control_point.name,
       variable_to_control: control_point.variable_to_control,
       instrument: control_point.instrument,
@@ -25,6 +26,7 @@ defmodule MvpApiWeb.ControlPointView do
       price_per_verification: control_point.price_per_verification,
       annual_cost_verification: control_point.annual_cost_verification,
       executor: control_point.executor,
-      annual_total_expense: control_point.annual_total_expense}
+      annual_total_expense: control_point.annual_total_expense
+    }
   end
 end

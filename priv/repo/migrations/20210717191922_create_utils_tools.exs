@@ -14,6 +14,5 @@ defmodule MvpApi.Repo.Migrations.CreateUtilsTools do
 
       timestamps()
     end
-
   end
 end

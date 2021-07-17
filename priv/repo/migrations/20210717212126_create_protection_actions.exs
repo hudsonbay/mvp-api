@@ -15,6 +15,5 @@ defmodule MvpApi.Repo.Migrations.CreateProtectionActions do
 
       timestamps()
     end
-
   end
 end

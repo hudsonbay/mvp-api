@@ -28,7 +28,8 @@ defmodule MvpApiWeb.UtilToolController do
   def update(conn, %{"id" => id, "util_tool" => util_tool_params}) do
     util_tool = Infrastructure.get_util_tool!(id)
 
-    with {:ok, %UtilTool{} = util_tool} <- Infrastructure.update_util_tool(util_tool, util_tool_params) do
+    with {:ok, %UtilTool{} = util_tool} <-
+           Infrastructure.update_util_tool(util_tool, util_tool_params) do
       render(conn, "show.json", util_tool: util_tool)
     end
   end
