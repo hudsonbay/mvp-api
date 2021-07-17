@@ -120,4 +120,75 @@ defmodule MvpApi.InfrastructureTest do
       assert %Ecto.Changeset{} = Infrastructure.change_tangible_fixed_asset(tangible_fixed_asset)
     end
   end
+
+  describe "utils_tools" do
+    alias MvpApi.Infrastructure.UtilTool
+
+    @valid_attrs %{annual_cost: "120.5", annual_wear_percentage: "120.5", dedication_percentage: "120.5", description: "some description", price_per_unit: "120.5", quantity: "some quantity", total_amount: "120.5"}
+    @update_attrs %{annual_cost: "456.7", annual_wear_percentage: "456.7", dedication_percentage: "456.7", description: "some updated description", price_per_unit: "456.7", quantity: "some updated quantity", total_amount: "456.7"}
+    @invalid_attrs %{annual_cost: nil, annual_wear_percentage: nil, dedication_percentage: nil, description: nil, price_per_unit: nil, quantity: nil, total_amount: nil}
+
+    def util_tool_fixture(attrs \\ %{}) do
+      {:ok, util_tool} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Infrastructure.create_util_tool()
+
+      util_tool
+    end
+
+    test "list_utils_tools/0 returns all utils_tools" do
+      util_tool = util_tool_fixture()
+      assert Infrastructure.list_utils_tools() == [util_tool]
+    end
+
+    test "get_util_tool!/1 returns the util_tool with given id" do
+      util_tool = util_tool_fixture()
+      assert Infrastructure.get_util_tool!(util_tool.id) == util_tool
+    end
+
+    test "create_util_tool/1 with valid data creates a util_tool" do
+      assert {:ok, %UtilTool{} = util_tool} = Infrastructure.create_util_tool(@valid_attrs)
+      assert util_tool.annual_cost == Decimal.new("120.5")
+      assert util_tool.annual_wear_percentage == Decimal.new("120.5")
+      assert util_tool.dedication_percentage == Decimal.new("120.5")
+      assert util_tool.description == "some description"
+      assert util_tool.price_per_unit == Decimal.new("120.5")
+      assert util_tool.quantity == "some quantity"
+      assert util_tool.total_amount == Decimal.new("120.5")
+    end
+
+    test "create_util_tool/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Infrastructure.create_util_tool(@invalid_attrs)
+    end
+
+    test "update_util_tool/2 with valid data updates the util_tool" do
+      util_tool = util_tool_fixture()
+      assert {:ok, %UtilTool{} = util_tool} = Infrastructure.update_util_tool(util_tool, @update_attrs)
+      assert util_tool.annual_cost == Decimal.new("456.7")
+      assert util_tool.annual_wear_percentage == Decimal.new("456.7")
+      assert util_tool.dedication_percentage == Decimal.new("456.7")
+      assert util_tool.description == "some updated description"
+      assert util_tool.price_per_unit == Decimal.new("456.7")
+      assert util_tool.quantity == "some updated quantity"
+      assert util_tool.total_amount == Decimal.new("456.7")
+    end
+
+    test "update_util_tool/2 with invalid data returns error changeset" do
+      util_tool = util_tool_fixture()
+      assert {:error, %Ecto.Changeset{}} = Infrastructure.update_util_tool(util_tool, @invalid_attrs)
+      assert util_tool == Infrastructure.get_util_tool!(util_tool.id)
+    end
+
+    test "delete_util_tool/1 deletes the util_tool" do
+      util_tool = util_tool_fixture()
+      assert {:ok, %UtilTool{}} = Infrastructure.delete_util_tool(util_tool)
+      assert_raise Ecto.NoResultsError, fn -> Infrastructure.get_util_tool!(util_tool.id) end
+    end
+
+    test "change_util_tool/1 returns a util_tool changeset" do
+      util_tool = util_tool_fixture()
+      assert %Ecto.Changeset{} = Infrastructure.change_util_tool(util_tool)
+    end
+  end
 end

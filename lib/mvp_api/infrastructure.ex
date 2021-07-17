@@ -101,4 +101,100 @@ defmodule MvpApi.Infrastructure do
   def change_tangible_fixed_asset(%TangibleFixedAsset{} = tangible_fixed_asset, attrs \\ %{}) do
     TangibleFixedAsset.changeset(tangible_fixed_asset, attrs)
   end
+
+  alias MvpApi.Infrastructure.UtilTool
+
+  @doc """
+  Returns the list of utils_tools.
+
+  ## Examples
+
+      iex> list_utils_tools()
+      [%UtilTool{}, ...]
+
+  """
+  def list_utils_tools do
+    Repo.all(UtilTool)
+  end
+
+  @doc """
+  Gets a single util_tool.
+
+  Raises `Ecto.NoResultsError` if the Util tool does not exist.
+
+  ## Examples
+
+      iex> get_util_tool!(123)
+      %UtilTool{}
+
+      iex> get_util_tool!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_util_tool!(id), do: Repo.get!(UtilTool, id)
+
+  @doc """
+  Creates a util_tool.
+
+  ## Examples
+
+      iex> create_util_tool(%{field: value})
+      {:ok, %UtilTool{}}
+
+      iex> create_util_tool(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_util_tool(attrs \\ %{}) do
+    %UtilTool{}
+    |> UtilTool.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a util_tool.
+
+  ## Examples
+
+      iex> update_util_tool(util_tool, %{field: new_value})
+      {:ok, %UtilTool{}}
+
+      iex> update_util_tool(util_tool, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_util_tool(%UtilTool{} = util_tool, attrs) do
+    util_tool
+    |> UtilTool.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a util_tool.
+
+  ## Examples
+
+      iex> delete_util_tool(util_tool)
+      {:ok, %UtilTool{}}
+
+      iex> delete_util_tool(util_tool)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_util_tool(%UtilTool{} = util_tool) do
+    Repo.delete(util_tool)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking util_tool changes.
+
+  ## Examples
+
+      iex> change_util_tool(util_tool)
+      %Ecto.Changeset{data: %UtilTool{}}
+
+  """
+  def change_util_tool(%UtilTool{} = util_tool, attrs \\ %{}) do
+    UtilTool.changeset(util_tool, attrs)
+  end
 end
