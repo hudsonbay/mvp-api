@@ -101,4 +101,100 @@ defmodule MvpApi.Environment do
   def change_waste_materials(%WasteMaterials{} = waste_materials, attrs \\ %{}) do
     WasteMaterials.changeset(waste_materials, attrs)
   end
+
+  alias MvpApi.Environment.WasteProcessProduct
+
+  @doc """
+  Returns the list of waste_process_products.
+
+  ## Examples
+
+      iex> list_waste_process_products()
+      [%WasteProcessProduct{}, ...]
+
+  """
+  def list_waste_process_products do
+    Repo.all(WasteProcessProduct)
+  end
+
+  @doc """
+  Gets a single waste_process_product.
+
+  Raises `Ecto.NoResultsError` if the Waste process product does not exist.
+
+  ## Examples
+
+      iex> get_waste_process_product!(123)
+      %WasteProcessProduct{}
+
+      iex> get_waste_process_product!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_waste_process_product!(id), do: Repo.get!(WasteProcessProduct, id)
+
+  @doc """
+  Creates a waste_process_product.
+
+  ## Examples
+
+      iex> create_waste_process_product(%{field: value})
+      {:ok, %WasteProcessProduct{}}
+
+      iex> create_waste_process_product(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_waste_process_product(attrs \\ %{}) do
+    %WasteProcessProduct{}
+    |> WasteProcessProduct.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a waste_process_product.
+
+  ## Examples
+
+      iex> update_waste_process_product(waste_process_product, %{field: new_value})
+      {:ok, %WasteProcessProduct{}}
+
+      iex> update_waste_process_product(waste_process_product, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_waste_process_product(%WasteProcessProduct{} = waste_process_product, attrs) do
+    waste_process_product
+    |> WasteProcessProduct.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a waste_process_product.
+
+  ## Examples
+
+      iex> delete_waste_process_product(waste_process_product)
+      {:ok, %WasteProcessProduct{}}
+
+      iex> delete_waste_process_product(waste_process_product)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_waste_process_product(%WasteProcessProduct{} = waste_process_product) do
+    Repo.delete(waste_process_product)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking waste_process_product changes.
+
+  ## Examples
+
+      iex> change_waste_process_product(waste_process_product)
+      %Ecto.Changeset{data: %WasteProcessProduct{}}
+
+  """
+  def change_waste_process_product(%WasteProcessProduct{} = waste_process_product, attrs \\ %{}) do
+    WasteProcessProduct.changeset(waste_process_product, attrs)
+  end
 end
