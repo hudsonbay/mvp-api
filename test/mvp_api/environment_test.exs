@@ -160,4 +160,81 @@ defmodule MvpApi.EnvironmentTest do
       assert %Ecto.Changeset{} = Environment.change_waste_process_product(waste_process_product)
     end
   end
+
+  describe "emanation_residuals" do
+    alias MvpApi.Environment.EmanationResidual
+
+    @valid_attrs %{amount: "120.5", environmental_burden: "120.5", maximum_admitted_standard: "120.5", overload_level: "120.5", price: "120.5", product_name: "some product_name", sale_amount: "120.5", um: "some um", waste_percentage: "120.5", waste_recovery_by_sale: "120.5"}
+    @update_attrs %{amount: "456.7", environmental_burden: "456.7", maximum_admitted_standard: "456.7", overload_level: "456.7", price: "456.7", product_name: "some updated product_name", sale_amount: "456.7", um: "some updated um", waste_percentage: "456.7", waste_recovery_by_sale: "456.7"}
+    @invalid_attrs %{amount: nil, environmental_burden: nil, maximum_admitted_standard: nil, overload_level: nil, price: nil, product_name: nil, sale_amount: nil, um: nil, waste_percentage: nil, waste_recovery_by_sale: nil}
+
+    def emanation_residual_fixture(attrs \\ %{}) do
+      {:ok, emanation_residual} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Environment.create_emanation_residual()
+
+      emanation_residual
+    end
+
+    test "list_emanation_residuals/0 returns all emanation_residuals" do
+      emanation_residual = emanation_residual_fixture()
+      assert Environment.list_emanation_residuals() == [emanation_residual]
+    end
+
+    test "get_emanation_residual!/1 returns the emanation_residual with given id" do
+      emanation_residual = emanation_residual_fixture()
+      assert Environment.get_emanation_residual!(emanation_residual.id) == emanation_residual
+    end
+
+    test "create_emanation_residual/1 with valid data creates a emanation_residual" do
+      assert {:ok, %EmanationResidual{} = emanation_residual} = Environment.create_emanation_residual(@valid_attrs)
+      assert emanation_residual.amount == Decimal.new("120.5")
+      assert emanation_residual.environmental_burden == Decimal.new("120.5")
+      assert emanation_residual.maximum_admitted_standard == Decimal.new("120.5")
+      assert emanation_residual.overload_level == Decimal.new("120.5")
+      assert emanation_residual.price == Decimal.new("120.5")
+      assert emanation_residual.product_name == "some product_name"
+      assert emanation_residual.sale_amount == Decimal.new("120.5")
+      assert emanation_residual.um == "some um"
+      assert emanation_residual.waste_percentage == Decimal.new("120.5")
+      assert emanation_residual.waste_recovery_by_sale == Decimal.new("120.5")
+    end
+
+    test "create_emanation_residual/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Environment.create_emanation_residual(@invalid_attrs)
+    end
+
+    test "update_emanation_residual/2 with valid data updates the emanation_residual" do
+      emanation_residual = emanation_residual_fixture()
+      assert {:ok, %EmanationResidual{} = emanation_residual} = Environment.update_emanation_residual(emanation_residual, @update_attrs)
+      assert emanation_residual.amount == Decimal.new("456.7")
+      assert emanation_residual.environmental_burden == Decimal.new("456.7")
+      assert emanation_residual.maximum_admitted_standard == Decimal.new("456.7")
+      assert emanation_residual.overload_level == Decimal.new("456.7")
+      assert emanation_residual.price == Decimal.new("456.7")
+      assert emanation_residual.product_name == "some updated product_name"
+      assert emanation_residual.sale_amount == Decimal.new("456.7")
+      assert emanation_residual.um == "some updated um"
+      assert emanation_residual.waste_percentage == Decimal.new("456.7")
+      assert emanation_residual.waste_recovery_by_sale == Decimal.new("456.7")
+    end
+
+    test "update_emanation_residual/2 with invalid data returns error changeset" do
+      emanation_residual = emanation_residual_fixture()
+      assert {:error, %Ecto.Changeset{}} = Environment.update_emanation_residual(emanation_residual, @invalid_attrs)
+      assert emanation_residual == Environment.get_emanation_residual!(emanation_residual.id)
+    end
+
+    test "delete_emanation_residual/1 deletes the emanation_residual" do
+      emanation_residual = emanation_residual_fixture()
+      assert {:ok, %EmanationResidual{}} = Environment.delete_emanation_residual(emanation_residual)
+      assert_raise Ecto.NoResultsError, fn -> Environment.get_emanation_residual!(emanation_residual.id) end
+    end
+
+    test "change_emanation_residual/1 returns a emanation_residual changeset" do
+      emanation_residual = emanation_residual_fixture()
+      assert %Ecto.Changeset{} = Environment.change_emanation_residual(emanation_residual)
+    end
+  end
 end

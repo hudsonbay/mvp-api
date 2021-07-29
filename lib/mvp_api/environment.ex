@@ -197,4 +197,100 @@ defmodule MvpApi.Environment do
   def change_waste_process_product(%WasteProcessProduct{} = waste_process_product, attrs \\ %{}) do
     WasteProcessProduct.changeset(waste_process_product, attrs)
   end
+
+  alias MvpApi.Environment.EmanationResidual
+
+  @doc """
+  Returns the list of emanation_residuals.
+
+  ## Examples
+
+      iex> list_emanation_residuals()
+      [%EmanationResidual{}, ...]
+
+  """
+  def list_emanation_residuals do
+    Repo.all(EmanationResidual)
+  end
+
+  @doc """
+  Gets a single emanation_residual.
+
+  Raises `Ecto.NoResultsError` if the Emanation residual does not exist.
+
+  ## Examples
+
+      iex> get_emanation_residual!(123)
+      %EmanationResidual{}
+
+      iex> get_emanation_residual!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_emanation_residual!(id), do: Repo.get!(EmanationResidual, id)
+
+  @doc """
+  Creates a emanation_residual.
+
+  ## Examples
+
+      iex> create_emanation_residual(%{field: value})
+      {:ok, %EmanationResidual{}}
+
+      iex> create_emanation_residual(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_emanation_residual(attrs \\ %{}) do
+    %EmanationResidual{}
+    |> EmanationResidual.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a emanation_residual.
+
+  ## Examples
+
+      iex> update_emanation_residual(emanation_residual, %{field: new_value})
+      {:ok, %EmanationResidual{}}
+
+      iex> update_emanation_residual(emanation_residual, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_emanation_residual(%EmanationResidual{} = emanation_residual, attrs) do
+    emanation_residual
+    |> EmanationResidual.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a emanation_residual.
+
+  ## Examples
+
+      iex> delete_emanation_residual(emanation_residual)
+      {:ok, %EmanationResidual{}}
+
+      iex> delete_emanation_residual(emanation_residual)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_emanation_residual(%EmanationResidual{} = emanation_residual) do
+    Repo.delete(emanation_residual)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking emanation_residual changes.
+
+  ## Examples
+
+      iex> change_emanation_residual(emanation_residual)
+      %Ecto.Changeset{data: %EmanationResidual{}}
+
+  """
+  def change_emanation_residual(%EmanationResidual{} = emanation_residual, attrs \\ %{}) do
+    EmanationResidual.changeset(emanation_residual, attrs)
+  end
 end

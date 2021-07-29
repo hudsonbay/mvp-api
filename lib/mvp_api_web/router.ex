@@ -58,7 +58,8 @@ defmodule MvpApiWeb.Router do
     resources "/innovation_projects", InnovationProjectController, except: [:new, :edit]
     resources "/infrastructure/utils_tools", UtilToolController, except: [:new, :edit]
     resources "/environment/waste_materials", WasteMaterialsController, except: [:new, :edit]
-    resources "/waste_process_products", WasteProcessProductController, except: [:new, :edit]
+    resources "/environment/waste_process_products", WasteProcessProductController, except: [:new, :edit]
+    resources "/environment/emanation_residuals", EmanationResidualController, except: [:new, :edit]
 
     resources "/infrastructure/metrology/control_points", ControlPointController,
       except: [:new, :edit]
