@@ -2,19 +2,21 @@ version: "3"
 
 services:
   api:
-    command: mix ecto.migrate && mix phx.server
     build:
       context: .
-
     depends_on:
       - db
+    links:
+      - db
+    command: /bin/sh entrypoint.sh
     ports:
       - "4000:4000"
     env_file: .env
 
   db:
-    image: postgres
+    image: postgres:12
     environment:
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
     ports:
       - "5432:5432"

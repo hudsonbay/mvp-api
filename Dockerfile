@@ -106,6 +106,7 @@ COPY lib/ ./lib
 
 
 COPY priv/ ./priv
+COPY entrypoint.sh entrypoint.sh
 
 
 RUN mix compile
