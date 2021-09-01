@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: .
+
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+    env_file: .env
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
