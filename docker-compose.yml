@@ -8,7 +8,7 @@ services:
       - db
     links:
       - db
-    command: /bin/sh entrypoint.sh
+    command: /bin/bash entrypoint.sh
     ports:
       - "4000:4000"
     env_file: .env
