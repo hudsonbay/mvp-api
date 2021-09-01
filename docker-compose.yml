@@ -8,7 +8,7 @@ services:
       - db
     links:
       - db
-    command: /bin/bash entrypoint.sh
+    command: sh -c "mix ecto.setup && mix phx.server"
     ports:
       - "4000:4000"
     env_file: .env
