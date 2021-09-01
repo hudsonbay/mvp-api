@@ -2,12 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :mvp_api, MvpApi.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "mvp_api_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
