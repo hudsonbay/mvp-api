@@ -14,7 +14,7 @@ config :mvp_api,
 # Configures the endpoint
 config :mvp_api, MvpApiWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "iy8zXCj/z2kOz9QAriICX5L0veOe/JpdRVeWJYAL3wBXBZK5aplrHNSqqk1mmJ8h",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: MvpApiWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MvpApi.PubSub,
   live_view: [signing_salt: "7zBwEPPK"]
