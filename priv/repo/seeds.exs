@@ -9,19 +9,19 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias MvpApi.Repo
+# alias MvpApi.Repo
 
-Faker.start()
+# Faker.start()
 
-alias MvpApi.Client.{Product, Factor}
-alias MvpApi.Accounts
-alias MvpApi.Processes.Process
-alias MvpApi.Providers.{ProcessProvider, ProviderEvaluation, TransportationSchema}
-alias MvpApi.Knowledge
-alias MvpApi.Knowledge.{IntangibleFixedAsset}
-alias MvpApi.Entities.Country
-alias MvpApi.Infrastructure
-alias MvpApi.Infrastructure.TangibleFixedAsset
+# alias MvpApi.Client.{Product, Factor}
+# alias MvpApi.Accounts
+# alias MvpApi.Processes.Process
+# alias MvpApi.Providers.{ProcessProvider, ProviderEvaluation, TransportationSchema}
+# alias MvpApi.Knowledge
+# alias MvpApi.Knowledge.{IntangibleFixedAsset}
+# alias MvpApi.Entities.Country
+# alias MvpApi.Infrastructure
+# alias MvpApi.Infrastructure.TangibleFixedAsset
 
 # # Products with factors
 # for _ <- 0..10 do
@@ -228,18 +228,18 @@ alias MvpApi.Infrastructure.TangibleFixedAsset
 # Accounts.register_user(%{"email" => "daniel@gmail.com", "password" => "123qweasdzxc"})
 # Accounts.register_user(%{"email" => "monteagudo@gmail.com", "password" => "123qweasdzxc"})
 
-# # Countries
-with {:ok, body} <- "priv/repo/seeds/countries.json" |> Path.expand() |> File.read() do
-  Poison.decode!(body, as: [%Country{}])
-  |> Enum.each(fn x -> Repo.insert!(x) end)
-end
+# # # Countries
+# with {:ok, body} <- "priv/repo/seeds/countries.json" |> Path.expand() |> File.read() do
+#   Poison.decode!(body, as: [%Country{}])
+#   |> Enum.each(fn x -> Repo.insert!(x) end)
+# end
 
-Infrastructure.create_tangible_fixed_asset(%{
-  "inventory_number" => "46590",
-  "dedicated_percentage" => Decimal.new(100),
-  "quantity" => 30,
-  "purchase_price" => Money.new(:CUP, Decimal.from_float(35_500.3)),
-  "depreciation_rate" => Decimal.new(6),
-  "description" => "Tornos",
-  "classification" => "Otros"
-})
+# Infrastructure.create_tangible_fixed_asset(%{
+#   "inventory_number" => "46590",
+#   "dedicated_percentage" => Decimal.new(100),
+#   "quantity" => 30,
+#   "purchase_price" => Money.new(:CUP, Decimal.from_float(35_500.3)),
+#   "depreciation_rate" => Decimal.new(6),
+#   "description" => "Tornos",
+#   "classification" => "Otros"
+# })
