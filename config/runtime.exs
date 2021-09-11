@@ -12,7 +12,7 @@ if config_env() == :prod do
     System.get_env("FLY_APP_NAME") ||
       raise "FLY_APP_NAME not available"
 
-  config :mvp_api, HelloElixirWeb.Endpoint,
+  config :mvp_api, MvpApiWeb.Endpoint,
     server: true,
     url: [host: "#{app_name}.fly.dev", port: 80],
     http: [
@@ -29,7 +29,7 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-  config :mvp_api, HelloElixir.Repo,
+  config :mvp_api, MvpApi.Repo,
     url: database_url,
     # IMPORTANT: Or it won't find the DB server
     socket_options: [:inet6],

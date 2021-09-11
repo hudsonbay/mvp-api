@@ -4,7 +4,7 @@
 FROM hexpm/elixir:1.12.1-erlang-24.0.1-alpine-3.13.3 AS build
 
 # install build dependencies
-RUN apk add --no-cache build-base npm make g++
+RUN apk add --no-cache build-base npm make g++ py3-pip
 
 # prepare build dir
 WORKDIR /app
@@ -18,7 +18,7 @@ RUN mix local.hex --force && \
 
 # set build ENV as prod
 ENV MIX_ENV=prod
-ENV SECRET_KEY_BASE=nokey
+ENV SECRET_KEY_BASE=iy8zXCj/z2kOz9QAriICX5L0veOe/JpdRVeWJYAL3wBXBZK5aplrHNSqqk1mmJ8h
 
 # Copy over the mix.exs and mix.lock files to load the dependencies. If those
 # files don't change, then we don't keep re-fetching and rebuilding the deps.
@@ -30,7 +30,8 @@ RUN mix deps.get --only prod && \
 
 # install npm dependencies
 COPY assets/package.json assets/package-lock.json ./assets/
-RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+# RUN npm --prefix ./assets ci --no-optional --progress=false --no-audit --loglevel=error
+RUN npm --prefix ./assets install
 
 COPY priv priv
 COPY assets assets
@@ -65,11 +66,11 @@ RUN chown nobody:nobody /app
 
 USER nobody:nobody
 
-COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/hello_elixir ./
+COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/mvp_api ./
 
 ENV HOME=/app
 ENV MIX_ENV=prod
-ENV SECRET_KEY_BASE=nokey
+ENV SECRET_KEY_BASE=iy8zXCj/z2kOz9QAriICX5L0veOe/JpdRVeWJYAL3wBXBZK5aplrHNSqqk1mmJ8h
 ENV PORT=4000
 
 CMD ["bin/mvp_api", "start"]
