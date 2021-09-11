@@ -4,15 +4,18 @@ services:
   api:
     build:
       context: .
-
+    container_name: mvp_api
     depends_on:
       - db
     ports:
       - "4000:4000"
+    links:
+      - db
 
   db:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
     ports:
       - "5432:5432"
