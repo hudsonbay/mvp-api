@@ -72,4 +72,4 @@ ENV MIX_ENV=prod
 ENV SECRET_KEY_BASE=nokey
 ENV PORT=4000
 
-CMD ["bin/hello_elixir", "start"]
+CMD ["bin/mvp_api", "start"]
