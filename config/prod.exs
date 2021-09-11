@@ -11,8 +11,10 @@ use Mix.Config
 # before starting your production server.
 
 config :mvp_api, MvpApiWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "0.0.0.0", port: 80],
+  http: [:inet6, port: System.get_env("PORT") || 4000],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true
 
 # config :mvp_api, MvpApiWeb.Endpoint,
 #   load_from_system_env: true,
