@@ -14,7 +14,7 @@ config :mvp_api,
 # Configures the endpoint
 config :mvp_api, MvpApiWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  secret_key_base: "iy8zXCj/z2kOz9QAriICX5L0veOe/JpdRVeWJYAL3wBXBZK5aplrHNSqqk1mmJ8h",
   render_errors: [view: MvpApiWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MvpApi.PubSub,
   live_view: [signing_salt: "7zBwEPPK"]
@@ -40,23 +40,6 @@ config :mvp_api, MvpApi.Guardian,
 config :mvp_api, MvpApiWeb.AuthAccessPipeline,
   module: MvpApi.Guardian,
   error_handler: MvpApiWeb.AuthErrorHandler
-
-# Kaffy
-config :kaffy,
-  otp_app: :mvp_api,
-  ecto_repo: MvpApi.Repo,
-  router: MvpApiWeb.Router,
-  admin_title: "MVP",
-  hide_dashboard: false,
-  resources: [
-    client: [
-      name: "Cliente",
-      resources: [
-        product: [schema: MvpApi.Client.Product, admin: MvpApiWeb.Kaffy.ProductAdmin],
-        factor: [schema: MvpApi.Client.Factor]
-      ]
-    ]
-  ]
 
 config :ex_money,
   auto_start_exchange_rate_service: false,

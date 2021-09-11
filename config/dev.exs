@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :mvp_api, MvpApi.Repo,
   adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL")
+  url: "postgres://postgres:postgres@localhost:5432/mvp_api_dev"
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

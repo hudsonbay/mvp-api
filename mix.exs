@@ -50,7 +50,6 @@ defmodule MvpApi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false},
       {:guardian, "~> 2.0"},
-      {:kaffy, "~> 0.9.0"},
       {:decimal, "~> 1.9"},
       {:numbers, "~> 5.2"},
       {:corsica, "~> 1.0"},

@@ -1,6 +1,5 @@
 defmodule MvpApiWeb.Router do
   use MvpApiWeb, :router
-  use Kaffy.Routes, scope: "/kaffy"
 
   import MvpApiWeb.UserAuth
 
