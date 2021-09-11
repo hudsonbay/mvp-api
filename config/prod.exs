@@ -16,6 +16,7 @@ config :mvp_api, MvpApiWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true
 
+# Heroku configuration
 # config :mvp_api, MvpApiWeb.Endpoint,
 #   load_from_system_env: true,
 #   http: [:inet6, port: System.get_env("PORT") || 4000],
