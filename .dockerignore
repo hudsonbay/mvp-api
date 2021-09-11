@@ -3,7 +3,7 @@
 # there might be conflicts. In the other hand, in CI progresses you may use
 # prebuilt folder to speed up docker image generating.
 _build/
-deps/
-node_modules/
 .git/
 *.log
+assets/node_modules/
+deps/

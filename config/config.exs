@@ -9,7 +9,8 @@ use Mix.Config
 
 config :mvp_api,
   ecto_repos: [MvpApi.Repo],
-  generators: [binary_id: true]
+  generators: [binary_id: true],
+  socket_options: [:inet6]
 
 # Configures the endpoint
 config :mvp_api, MvpApiWeb.Endpoint,
