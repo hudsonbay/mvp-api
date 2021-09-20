@@ -12,6 +12,10 @@ jobs:
     services:
       db:
         image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mvp_api_test
         ports: ['5432:5432']
         options: >-
           --health-cmd pg_isready
@@ -20,11 +24,11 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v1.0.0
+      - uses: actions/checkout@v2
       - uses: actions/setup-elixir@v1.0.0
         with:
-          otp-version: 21.x
-          elixir-version: 1.11.0
+          otp-version: 24.0.1
+          elixir-version: 1.12.1
       - run: mix deps.get
       - run: mix test
 
@@ -37,7 +41,7 @@ jobs:
     needs: test
 
     steps:
-      - uses: actions/checkout@v1.0.0
+      - uses: actions/checkout@v2
       - run: |+
           cat >~/.netrc <<EOF
           machine api.heroku.com
