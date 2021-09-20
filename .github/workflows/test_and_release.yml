@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: apt-get install build-essential
+      - run: sudo apt-get install build-essential
       - uses: actions/setup-elixir@v1
         with:
           otp-version: 24.0.1
