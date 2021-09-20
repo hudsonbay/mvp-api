@@ -1,23 +1,21 @@
-name: CI
+name: Application Test and Release Workflow
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test:
-    name: Run tests
     runs-on: ubuntu-latest
-    env: {MIX_ENV: test}
 
     services:
       db:
-        image: postgres:13
-        env: {POSTGRES_PASSWORD: postgres}
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mvp_api_test
         ports: ['5432:5432']
         options: >-
           --health-cmd pg_isready
@@ -27,23 +25,33 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Restore mix cache
-        uses: actions/cache@v2
-        with:
-          path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-
-      - name: Restore build cache
-        uses: actions/cache@v2
-        with:
-          path: _build
-          key: ${{ runner.os }}-build-${{ hashFiles('mix.lock') }}-${{ hashFiles('**.ex?') }}
-          restore-keys: ${{ runner.os }}-build-
+      - run: apt-get install build-essential
       - uses: actions/setup-elixir@v1
-        with: {otp-version: 23.0.1, elixir-version: 1.11.0}
-      - name: Fetch mix dependencies
-        run: mix deps.get
-      - name: Run format check
-        run: mix format --check-formatted
-      - name: Run tests
-        run: mix test
+        with:
+          otp-version: 24.0.1
+          elixir-version: 1.12.1
+      - run: mix deps.get
+      - run: mix test
+
+  release:
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+    runs-on: ubuntu-latest
+
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |+
+          cat >~/.netrc <<EOF
+          machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+      - run: heroku git:remote -a $(basename ${{ github.repository}} )
+      - run: git push heroku HEAD:refs/heads/main
+      - run: heroku run "POOL_SIZE=2 mix ecto.migrate"
