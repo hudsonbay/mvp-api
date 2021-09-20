@@ -42,7 +42,10 @@ jobs:
     needs: test
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - run: |+
           cat >~/.netrc <<EOF
           machine api.heroku.com
