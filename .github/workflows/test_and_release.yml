@@ -59,4 +59,4 @@ jobs:
       # - run: heroku git:remote -a $(basename ${{ github.repository}} ) # if the app name matches the Github repo name
       - run: heroku git:remote -a mvp-api-jc
       - run: git push heroku HEAD:refs/heads/main
-      - run: heroku run "POOL_SIZE=2 mix ecto.migrate"
+      - run: heroku run "MIX_ENV=prod mix ecto.migrate && mix phx.server"
