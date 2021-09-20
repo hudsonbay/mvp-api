@@ -10,20 +10,20 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 
-config :mvp_api, MvpApiWeb.Endpoint,
-  url: [host: "0.0.0.0", port: 80],
-  http: [:inet6, port: System.get_env("PORT") || 4000],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  server: true
+# config :mvp_api, MvpApiWeb.Endpoint,
+#   url: [host: "0.0.0.0", port: 80],
+#   http: [:inet6, port: System.get_env("PORT") || 4000],
+#   cache_static_manifest: "priv/static/cache_manifest.json",
+#   server: true
 
 # Heroku configuration
-# config :mvp_api, MvpApiWeb.Endpoint,
-#   load_from_system_env: true,
-#   http: [:inet6, port: System.get_env("PORT") || 4000],
-#   url: [scheme: "https", host: "mvp-api-jc.herokuapp.com", port: 443],
-#   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-#   cache_static_manifest: "priv/static/cache_manifest.json",
-#   secret_key_base: System.get_env("SECRET_KEY_BASE")
+config :mvp_api, MvpApiWeb.Endpoint,
+  load_from_system_env: true,
+  http: [:inet6, port: System.get_env("PORT") || 4000],
+  url: [scheme: "https", host: "mvp-api-jc.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # config :mvp_api, MvpApiWeb.Endpoint,
 #   url: [host: System.get_env("RENDER_EXTERNAL_HOSTNAME") || "localhost", port: 80],
