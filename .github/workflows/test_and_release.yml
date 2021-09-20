@@ -25,11 +25,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: sudo apt-get install build-essential
       - uses: actions/setup-elixir@v1
         with:
           otp-version: 24.0.1
           elixir-version: 1.12.1
+          experimental-otp: true
       - run: mix deps.get
       - run: mix test
 
