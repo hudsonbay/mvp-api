@@ -36,3 +36,4 @@ npm-debug.log
 /config/prod.secret.exs
 
 nohup.out
+testing_info.md
